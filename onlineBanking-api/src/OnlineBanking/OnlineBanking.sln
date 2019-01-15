@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBanking", "OnlineBanking\OnlineBanking.csproj", "{BB7C09DA-4AA9-426A-9E65-B7D94D5EF1F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBanking", "OnlineBanking\OnlineBanking.csproj", "{BB7C09DA-4AA9-426A-9E65-B7D94D5EF1F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBanking.BLL", "OnlineBanking.BLL\OnlineBanking.BLL.csproj", "{21604E3D-7CFC-4587-A6EB-F270D224FF9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBanking.Core", "OnlineBanking.Core\OnlineBanking.Core.csproj", "{EAF9C40E-28F3-4733-A7C5-80B3DDEC12CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBanking.DAL", "OnlineBanking.DAL\OnlineBanking.DAL.csproj", "{E2091C7D-57DD-424C-82EA-09D4CC85265C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{BB7C09DA-4AA9-426A-9E65-B7D94D5EF1F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB7C09DA-4AA9-426A-9E65-B7D94D5EF1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB7C09DA-4AA9-426A-9E65-B7D94D5EF1F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21604E3D-7CFC-4587-A6EB-F270D224FF9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21604E3D-7CFC-4587-A6EB-F270D224FF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21604E3D-7CFC-4587-A6EB-F270D224FF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21604E3D-7CFC-4587-A6EB-F270D224FF9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF9C40E-28F3-4733-A7C5-80B3DDEC12CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF9C40E-28F3-4733-A7C5-80B3DDEC12CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF9C40E-28F3-4733-A7C5-80B3DDEC12CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF9C40E-28F3-4733-A7C5-80B3DDEC12CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2091C7D-57DD-424C-82EA-09D4CC85265C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2091C7D-57DD-424C-82EA-09D4CC85265C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2091C7D-57DD-424C-82EA-09D4CC85265C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2091C7D-57DD-424C-82EA-09D4CC85265C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

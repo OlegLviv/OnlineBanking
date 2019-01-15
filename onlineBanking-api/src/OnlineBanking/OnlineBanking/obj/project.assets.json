@@ -11800,11 +11800,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Spudi\\source\\repos\\OnlineBanking\\OnlineBanking\\OnlineBanking.csproj",
+      "projectUniqueName": "C:\\Users\\Spudi\\Documents\\OnlineBanking\\onlineBanking-api\\src\\OnlineBanking\\OnlineBanking\\OnlineBanking.csproj",
       "projectName": "OnlineBanking",
-      "projectPath": "C:\\Users\\Spudi\\source\\repos\\OnlineBanking\\OnlineBanking\\OnlineBanking.csproj",
+      "projectPath": "C:\\Users\\Spudi\\Documents\\OnlineBanking\\onlineBanking-api\\src\\OnlineBanking\\OnlineBanking\\OnlineBanking.csproj",
       "packagesPath": "C:\\Users\\Spudi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Spudi\\source\\repos\\OnlineBanking\\OnlineBanking\\obj\\",
+      "outputPath": "C:\\Users\\Spudi\\Documents\\OnlineBanking\\onlineBanking-api\\src\\OnlineBanking\\OnlineBanking\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
