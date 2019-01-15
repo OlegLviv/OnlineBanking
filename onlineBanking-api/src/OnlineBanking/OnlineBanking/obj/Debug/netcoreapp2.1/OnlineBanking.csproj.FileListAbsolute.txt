@@ -1,0 +1,17 @@
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.1\OnlineBanking.deps.json
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.1\OnlineBanking.runtimeconfig.json
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.1\OnlineBanking.runtimeconfig.dev.json
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.1\OnlineBanking.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.csprojAssemblyReference.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.csproj.CoreCompileInputs.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.RazorAssemblyInfo.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.RazorAssemblyInfo.cs
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.AssemblyInfoInputs.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.AssemblyInfo.cs
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.RazorTargetAssemblyInfo.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.1\OnlineBanking.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.1\OnlineBanking.Core.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.1\OnlineBanking.Core.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.1\OnlineBanking.csproj.CopyComplete

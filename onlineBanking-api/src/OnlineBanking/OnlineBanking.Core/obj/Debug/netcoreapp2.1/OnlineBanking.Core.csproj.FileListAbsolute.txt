@@ -1,0 +1,9 @@
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\bin\Debug\netcoreapp2.1\OnlineBanking.Core.deps.json
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\bin\Debug\netcoreapp2.1\OnlineBanking.Core.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\obj\Debug\netcoreapp2.1\OnlineBanking.Core.csproj.CoreCompileInputs.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\obj\Debug\netcoreapp2.1\OnlineBanking.Core.AssemblyInfoInputs.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\obj\Debug\netcoreapp2.1\OnlineBanking.Core.AssemblyInfo.cs
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\obj\Debug\netcoreapp2.1\OnlineBanking.Core.csprojAssemblyReference.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\bin\Debug\netcoreapp2.1\OnlineBanking.Core.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\obj\Debug\netcoreapp2.1\OnlineBanking.Core.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.Core\obj\Debug\netcoreapp2.1\OnlineBanking.Core.pdb
