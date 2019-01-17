@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineBanking.Core.Models.DomainModels
 {
-    public interface IEntity<TId>
+    public interface IEntity
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        TId Id { get; set; }
+        Guid Id { get; set; }
     }
 }

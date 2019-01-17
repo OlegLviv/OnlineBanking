@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using OnlineBanking.Core.Models.DomainModels;
-using OnlineBanking.Core.Models.Dtos;
 using OnlineBanking.Core.Models.Dtos.Token;
 using OnlineBanking.Core.Models.Dtos.User;
 
@@ -27,10 +26,7 @@ namespace OnlineBanking.Controllers
             _tokenLifetime,
             _tokenKey;
 
-        public TokenController(IConfiguration configuration,
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            RoleManager<IdentityRole> roleManager)
+        public TokenController(IConfiguration configuration, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
