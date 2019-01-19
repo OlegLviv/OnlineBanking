@@ -4860,6 +4860,19 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "OnlineBanking.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "OnlineBanking.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/OnlineBanking.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/OnlineBanking.BLL.dll": {}
+        }
+      },
       "OnlineBanking.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -13352,6 +13365,11 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "OnlineBanking.BLL/1.0.0": {
+      "type": "project",
+      "path": "../OnlineBanking.BLL/OnlineBanking.BLL.csproj",
+      "msbuildProject": "../OnlineBanking.BLL/OnlineBanking.BLL.csproj"
+    },
     "OnlineBanking.Core/1.0.0": {
       "type": "project",
       "path": "../OnlineBanking.Core/OnlineBanking.Core.csproj",
@@ -13370,6 +13388,7 @@
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.1",
+      "OnlineBanking.BLL >= 1.0.0",
       "OnlineBanking.Core >= 1.0.0",
       "OnlineBanking.DAL >= 1.0.0"
     ]
@@ -13404,6 +13423,9 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
+            "C:\\Users\\Spudi\\Documents\\OnlineBanking\\onlineBanking-api\\src\\OnlineBanking\\OnlineBanking.BLL\\OnlineBanking.BLL.csproj": {
+              "projectPath": "C:\\Users\\Spudi\\Documents\\OnlineBanking\\onlineBanking-api\\src\\OnlineBanking\\OnlineBanking.BLL\\OnlineBanking.BLL.csproj"
+            },
             "C:\\Users\\Spudi\\Documents\\OnlineBanking\\onlineBanking-api\\src\\OnlineBanking\\OnlineBanking.Core\\OnlineBanking.Core.csproj": {
               "projectPath": "C:\\Users\\Spudi\\Documents\\OnlineBanking\\onlineBanking-api\\src\\OnlineBanking\\OnlineBanking.Core\\OnlineBanking.Core.csproj"
             },

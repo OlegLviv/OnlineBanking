@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineBanking.BLL.Providers;
 using OnlineBanking.Core.Models.DomainModels;
+using OnlineBanking.DAL;
 
 namespace OnlineBanking.Extensions.Services
 {
@@ -18,11 +20,12 @@ namespace OnlineBanking.Extensions.Services
 
                     options.User.RequireUniqueEmail = true;
                 })
-                .AddEntityFrameworkStores<DbContext>()
+                .AddEntityFrameworkStores<DataBaseContext>()
                 .AddUserManager<UserManager<User>>()
                 .AddSignInManager<SignInManager<User>>()
                 .AddRoleManager<RoleManager<Core.Models.DomainModels.IdentityRole>>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddTokenProvider<UserTwoFactorTokenProvider>(ProviderConstansts.UserTwoFactorTokenProvider);
         }
     }
 }

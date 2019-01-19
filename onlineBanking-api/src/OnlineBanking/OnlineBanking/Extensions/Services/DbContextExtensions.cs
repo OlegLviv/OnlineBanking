@@ -9,7 +9,7 @@ namespace OnlineBanking.Extensions.Services
     {
         public static void AddDateBaseContext(this IServiceCollection serviceCollection, IConfiguration configuration, IHostingEnvironment environment)
         {
-            serviceCollection.AddDbContext<DbContext>(builder =>
+            serviceCollection.AddDbContext<DAL.DataBaseContext>(builder =>
             {
                 builder.UseSqlServer(environment.IsDevelopment()
                     ? configuration.GetConnectionString("DevCon")

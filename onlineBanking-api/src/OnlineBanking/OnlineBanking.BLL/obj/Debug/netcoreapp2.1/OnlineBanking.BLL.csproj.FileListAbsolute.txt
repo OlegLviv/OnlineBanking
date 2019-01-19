@@ -7,3 +7,6 @@ C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\Onlin
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.AssemblyInfo.cs
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.dll
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.Core.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.Core.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.csproj.CopyComplete

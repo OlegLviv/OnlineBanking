@@ -14,17 +14,17 @@ namespace OnlineBanking.Extensions.Services
                 .AddCookie()
                 .AddJwtBearer(jwtBearerOptions =>
                 {
-                    jwtBearerOptions.RequireHttpsMetadata = true;
+                    jwtBearerOptions.RequireHttpsMetadata = bool.Parse(configuration["RequireHttpsMetadata"]);
                     jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
                     {
-                        ValidateActor = bool.Parse(configuration["Token:ValidateActor"]),
-                        ValidateAudience = bool.Parse(configuration["Token:ValidateAudience"]),
-                        ValidateLifetime = bool.Parse(configuration["Token:ValidateLifetime"]),
-                        ValidateIssuerSigningKey = bool.Parse(configuration["Token:ValidateIssuerSigningKey"]),
-                        ValidIssuer = configuration["Token:Issuer"],
-                        ValidAudience = configuration["Token:Audience"],
+                        ValidateActor = bool.Parse(configuration["ValidateActor"]),
+                        ValidateAudience = bool.Parse(configuration["ValidateAudience"]),
+                        ValidateLifetime = bool.Parse(configuration["ValidateLifetime"]),
+                        ValidateIssuerSigningKey = bool.Parse(configuration["ValidateIssuerSigningKey"]),
+                        ValidIssuer = configuration["Issuer"],
+                        ValidAudience = configuration["Audience"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
-                            (configuration["Token:Key"]))
+                            (configuration["Key"]))
                     };
                 });
         }

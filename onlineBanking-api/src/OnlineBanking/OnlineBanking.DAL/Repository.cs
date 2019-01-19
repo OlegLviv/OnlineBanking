@@ -10,10 +10,10 @@ namespace OnlineBanking.DAL
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
-        private readonly DbContext _context;
+        private readonly DataBaseContext _context;
         private DbSet<TEntity> _entities;
 
-        public Repository(DbContext context)
+        public Repository(DataBaseContext context)
         {
             _context = context;
         }

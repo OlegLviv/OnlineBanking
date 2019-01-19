@@ -9,6 +9,7 @@ namespace OnlineBanking.Core.Models.Dtos.User
         public string UserName { get; set; }
 
         [Required]
+        [MinLength(6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

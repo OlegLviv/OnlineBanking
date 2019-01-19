@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -16,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineBanking.BLL\OnlineBanking.BLL.csproj" />
     <ProjectReference Include="..\OnlineBanking.Core\OnlineBanking.Core.csproj" />
     <ProjectReference Include="..\OnlineBanking.DAL\OnlineBanking.DAL.csproj" />
   </ItemGroup>

@@ -5,14 +5,15 @@ using OnlineBanking.Core.Models.DomainModels;
 
 namespace OnlineBanking.DAL
 {
-    public sealed class DbContext : IdentityDbContext<User, IdentityRole, Guid>
+    public sealed class DataBaseContext : IdentityDbContext<User, IdentityRole, Guid>
     {
-        public DbContext(DbContextOptions options)
+        public DataBaseContext(DbContextOptions options)
             : base(options)
         {
             Database.EnsureCreated();
         }
 
+        public DataBaseContext() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseLazyLoadingProxies();
     }

@@ -7,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using OnlineBanking.BLL.Providers;
 using OnlineBanking.Core.Models.DomainModels;
 using OnlineBanking.Core.Models.Dtos.Token;
 using OnlineBanking.Core.Models.Dtos.User;
@@ -30,24 +32,26 @@ namespace OnlineBanking.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _tokenIssuer = configuration["Token:Issuer"];
-            _tokenAudience = configuration["Token:Audience"];
-            _tokenLifetime = configuration["Token:Lifetime"];
-            _tokenKey = configuration["Token:Key"];
+            _tokenIssuer = configuration["Issuer"];
+            _tokenAudience = configuration["Audience"];
+            _tokenLifetime = configuration["Lifetime"];
+            _tokenKey = configuration["Key"];
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] LoginUserDto model)
+        [HttpGet("{userId}/{code}")]
+        public async Task<IActionResult> Get(Guid? userId, string code)
         {
-            var user = await _userManager.FindByEmailAsync(model.UserName) ?? await _userManager.FindByNameAsync(model.UserName);
+            if (userId == null || string.IsNullOrWhiteSpace(code))
+                return BadRequest("Incorrect user id or code");
+
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null)
-                return NotFound("User with this login has not been found");
+                return BadRequest("Incorrect user id");
 
-            var singInRes = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
-
-            if (!singInRes.Succeeded)
-                return BadRequest("Incorrect password");
+            if (!await _userManager.VerifyTwoFactorTokenAsync(user, ProviderConstansts.UserTwoFactorTokenProvider, code)
+            )
+                return BadRequest("Incorrect security code");
 
             var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -55,12 +59,35 @@ namespace OnlineBanking.Controllers
                 issuer: _tokenIssuer,
                 audience: _tokenAudience,
                 notBefore: DateTime.UtcNow,
-                claims: GetIdentity(model.UserName, userRoles).Claims,
+                claims: GetIdentity(user.UserName, userRoles).Claims,
                 expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(double.Parse(_tokenLifetime))),
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenKey)), SecurityAlgorithms.HmacSha256));
 
             return Ok(new TokenDto { AccessToken = new JwtSecurityTokenHandler().WriteToken(jwt) });
+        }
+
+        [HttpPost("generateUser2fa")]
+        public async Task<IActionResult> GenerateUserTwoFactorToken([FromBody] LoginUserDto logInDto)
+        {
+            var user = await FindUserByUserNameOrEmail(logInDto);
+
+            if (user == null)
+                return BadRequest("Incorrect login or password");
+
+            if (!(await _signInManager.CheckPasswordSignInAsync(user, logInDto.Password, true)).Succeeded)
+                return BadRequest("Incorrect password");
+
+            var twoFactorToken = await _userManager.GenerateTwoFactorTokenAsync(user, ProviderConstansts.UserTwoFactorTokenProvider);
+
+            if (twoFactorToken == null)
+                return BadRequest("Can't generate new token");
+
+            return new JsonResult(new TwoFactorTokenDto
+            {
+                TwoFactorCode = twoFactorToken,
+                UserId = user.Id
+            });
         }
 
         private static ClaimsIdentity GetIdentity(string userName, IEnumerable<string> roles)
@@ -78,5 +105,8 @@ namespace OnlineBanking.Controllers
 
             return claimsIdentity;
         }
+
+        private async Task<User> FindUserByUserNameOrEmail(LoginUserDto model)
+            => await _userManager.FindByEmailAsync(model.UserName) ?? await _userManager.FindByNameAsync(model.UserName);
     }
 }

@@ -29,6 +29,7 @@
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.1",
+          "OnlineBanking.BLL": "1.0.0",
           "OnlineBanking.Core": "1.0.0",
           "OnlineBanking.DAL": "1.0.0"
         },
@@ -719,6 +720,17 @@
           "System.Reflection.Extensions": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0"
+        }
+      },
+      "OnlineBanking.BLL/1.0.0": {
+        "dependencies": {
+          "OnlineBanking.Core": "1.0.0"
+        },
+        "runtime": {
+          "OnlineBanking.BLL.dll": {}
+        },
+        "compile": {
+          "OnlineBanking.BLL.dll": {}
         }
       },
       "OnlineBanking.Core/1.0.0": {
@@ -3976,6 +3988,11 @@
       "sha512": "sha512-Yn/WfYe9RoRfmSLvUt2JerP0BTGGykCZkQPgojaxgzF2N0oPo+/AhB8TXOpdCcNlrG3VRtsamtK2uzsp3cqRVw==",
       "path": "system.linq.queryable/4.0.1",
       "hashPath": "system.linq.queryable.4.0.1.nupkg.sha512"
+    },
+    "OnlineBanking.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "OnlineBanking.Core/1.0.0": {
       "type": "project",
