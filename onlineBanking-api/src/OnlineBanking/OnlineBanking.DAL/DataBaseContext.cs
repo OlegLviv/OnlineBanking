@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineBanking.Core.Models.DomainModels;
+using OnlineBanking.Core.Models.DomainModels.User;
 
 namespace OnlineBanking.DAL
 {

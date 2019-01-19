@@ -724,6 +724,7 @@
       },
       "OnlineBanking.BLL/1.0.0": {
         "dependencies": {
+          "AutoMapper": "8.0.0",
           "OnlineBanking.Core": "1.0.0"
         },
         "runtime": {

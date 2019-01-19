@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using OnlineBanking.BLL.Storages;
-using OnlineBanking.Core.Models.DomainModels;
+using OnlineBanking.Core.Models.DomainModels.User;
 using OnlineBanking.Core.Models.Providers;
 
 namespace OnlineBanking.BLL.Providers

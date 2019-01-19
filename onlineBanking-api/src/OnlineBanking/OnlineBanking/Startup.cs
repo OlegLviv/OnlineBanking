@@ -18,6 +18,7 @@ namespace OnlineBanking
                 .SetBasePath($"{environment.WebRootPath}")
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile("tokensettings.json")
+                .AddJsonFile("emailsettings.json")
                 .Build();
 
             Environment = environment;
@@ -32,11 +33,11 @@ namespace OnlineBanking
             services.AddSingleton(provider => Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDateBaseContext(Configuration, Environment);
+            services.AddAutoMapper(mapper => mapper.AddProfile(new AutoMapperProfile()));
             services.AddServices();
             services.AddSingleton<IUserTwoFactorTokenStorage, UserTwoFactorStaticTokenStorage>();
             services.AddIdentity();
             services.AddBearerAuthentication(Configuration);
-            services.AddAutoMapper(mapper => mapper.AddProfile(new AutoMapperProfile()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

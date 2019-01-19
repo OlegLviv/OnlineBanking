@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OnlineBanking.Core.Models.DomainModels;
+using OnlineBanking.Core.Models.DomainModels.Abstract;
 
 namespace OnlineBanking.DAL
 {

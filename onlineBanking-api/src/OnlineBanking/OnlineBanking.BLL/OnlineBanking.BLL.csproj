@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OnlineBanking.Core\OnlineBanking.Core.csproj" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\OnlineBanking.Core\OnlineBanking.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineBanking.Core.Models.DomainModels
+namespace OnlineBanking.Core.Models.DomainModels.Abstract
 {
     public interface IEntity
     {

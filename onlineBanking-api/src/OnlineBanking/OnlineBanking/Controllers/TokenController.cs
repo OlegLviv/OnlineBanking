@@ -11,7 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using OnlineBanking.BLL.Providers;
-using OnlineBanking.Core.Models.DomainModels;
+using OnlineBanking.BLL.Services.Abstract;
+using OnlineBanking.Core.Models.DomainModels.User;
 using OnlineBanking.Core.Models.Dtos.Token;
 using OnlineBanking.Core.Models.Dtos.User;
 
@@ -23,12 +24,16 @@ namespace OnlineBanking.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IEmailSendingService _emailSendingService;
         private readonly string _tokenIssuer,
             _tokenAudience,
             _tokenLifetime,
             _tokenKey;
 
-        public TokenController(IConfiguration configuration, UserManager<User> userManager, SignInManager<User> signInManager)
+        public TokenController(IConfiguration configuration,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IEmailSendingService emailSendingService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -36,6 +41,7 @@ namespace OnlineBanking.Controllers
             _tokenAudience = configuration["Audience"];
             _tokenLifetime = configuration["Lifetime"];
             _tokenKey = configuration["Key"];
+            _emailSendingService = emailSendingService;
         }
 
         [HttpGet("{userId}/{code}")]
@@ -67,8 +73,8 @@ namespace OnlineBanking.Controllers
             return Ok(new TokenDto { AccessToken = new JwtSecurityTokenHandler().WriteToken(jwt) });
         }
 
-        [HttpPost("generateUser2fa")]
-        public async Task<IActionResult> GenerateUserTwoFactorToken([FromBody] LoginUserDto logInDto)
+        [HttpPost("sendUser2fa")]
+        public async Task<IActionResult> SendUserTwoFactorToken([FromBody] LoginUserDto logInDto)
         {
             var user = await FindUserByUserNameOrEmail(logInDto);
 
@@ -83,9 +89,10 @@ namespace OnlineBanking.Controllers
             if (twoFactorToken == null)
                 return BadRequest("Can't generate new token");
 
-            return new JsonResult(new TwoFactorTokenDto
+            await _emailSendingService.SendAsync(user.Email, "Code", twoFactorToken);
+
+            return Ok(new TwoFactorTokenDto
             {
-                TwoFactorCode = twoFactorToken,
                 UserId = user.Id
             });
         }
@@ -107,6 +114,8 @@ namespace OnlineBanking.Controllers
         }
 
         private async Task<User> FindUserByUserNameOrEmail(LoginUserDto model)
-            => await _userManager.FindByEmailAsync(model.UserName) ?? await _userManager.FindByNameAsync(model.UserName);
+            => await _userManager
+                .Users
+                .FirstOrDefaultAsync(user => user.Email == model.UserName || user.UserName == model.UserName);
     }
 }

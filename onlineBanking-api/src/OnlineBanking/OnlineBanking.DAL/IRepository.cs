@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OnlineBanking.Core.Models.DomainModels;
+using OnlineBanking.Core.Models.DomainModels.Abstract;
 
 namespace OnlineBanking.DAL
 {
