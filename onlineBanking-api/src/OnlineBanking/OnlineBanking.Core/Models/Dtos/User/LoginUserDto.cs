@@ -5,8 +5,9 @@ namespace OnlineBanking.Core.Models.Dtos.User
     public class LoginUserDto
     {
         [Required]
-        [MinLength(2)]
-        public string UserName { get; set; }
+        [RegularExpression("^\\+380[0-9]{9}$", ErrorMessage = "Invalid phone number")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
 
         [Required]
         [MinLength(6)]

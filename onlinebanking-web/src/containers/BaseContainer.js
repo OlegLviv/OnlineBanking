@@ -12,26 +12,22 @@ class BaseContainer extends React.Component {
         }
     }
 
+    componentDidUpdate(_, prevState) {
+        if (this.state.errorMessage && !prevState.errorMessage)
+            message
+                .error(this.state.errorMessage)
+                .then(() => this.setState({ errorMessage: '' }));
+        if (this.state.alertMessage && !prevState.alertMessage)
+            message.info(this.state.alertMessage)
+                .then(() => this.setState({ alertMessage: '' }));
+        if (this.state.successMessage && !prevState.successMessage)
+            message
+                .success(this.state.successMessage)
+                .then(() => this.setState({ successMessage: '' }));
+    }
+
     render() {
-        return (
-            <>
-                {
-                    this.state.alertMessage && message
-                        .info(this.state.alertMessage)
-                        .then(() => this.setState({ alertMessage: '' }))
-                }
-                {
-                    this.state.errorMessage && message
-                        .error(this.state.errorMessage)
-                        .then(() => this.setState({ errorMessage: '' }))
-                }
-                {
-                    this.state.successMessage && message
-                        .success(this.state.successMessage)
-                        .then(() => this.setState({ successMessage: '' }))
-                }
-            </>
-        );
+        return (<></>);
     }
 }
 

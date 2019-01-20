@@ -3,8 +3,10 @@ C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\Onlin
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.runtimeconfig.dev.json
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.dll
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.BLL.dll
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.Core.dll
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.DAL.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.BLL.pdb
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.Core.pdb
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.DAL.pdb
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.2\OnlineBanking.csprojAssemblyReference.cache
@@ -17,5 +19,3 @@ C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\Onlin
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.2\OnlineBanking.csproj.CopyComplete
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.2\OnlineBanking.dll
 C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\obj\Debug\netcoreapp2.2\OnlineBanking.pdb
-C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.BLL.dll
-C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking\bin\Debug\netcoreapp2.2\OnlineBanking.BLL.pdb

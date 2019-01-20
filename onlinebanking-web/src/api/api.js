@@ -18,8 +18,9 @@ const getApiUrl = () => {
     return apiUrl;
 }
 
-export const logIn = token => {
+export const logIn = (token, redirectUrl) => {
     localStorage.setItem(ACCESS_TOKE, token);
+    redirectUrl && window.location.replace(redirectUrl);
 }
 
 export const logOut = () => {
@@ -57,7 +58,7 @@ export const publicApi = api.create(
     }
 );
 
-export const apiGet = url => {
+export const apiGet = async url => {
     return getPrivateApi()
         .get(`${API_URL}${url}`)
         .then(resp => resp, ({ response }) => {
@@ -69,7 +70,7 @@ export const apiGet = url => {
         });
 };
 
-export const apiPost = (url, body) => {
+export const apiPost = async (url, body) => {
     return getPrivateApi()
         .post(`${API_URL}${url}`, body)
         .then(resp => resp, ({ response }) => {
@@ -81,7 +82,7 @@ export const apiPost = (url, body) => {
         });
 };
 
-export const apiPut = (url, body) => {
+export const apiPut = async (url, body) => {
     return getPrivateApi()
         .put(`${API_URL}${url}`, body)
         .then(resp => resp, ({ response }) => {
@@ -93,7 +94,7 @@ export const apiPut = (url, body) => {
         });
 };
 
-export const apiDelete = url => {
+export const apiDelete = async url => {
     return getPrivateApi()
         .delete(`${API_URL}${url}`)
         .then(resp => resp, ({ response }) => {

@@ -1,9 +1,16 @@
 import React from 'react';
-import {
-    Form, Icon, Input, Button, Checkbox, Select
-} from 'antd';
-import './LoginForm.css';
 import classnames from 'classnames';
+import './LoginForm.css';
+
+import {
+    Form,
+    Icon,
+    Input,
+    Button,
+    Alert,
+    Select,
+    Spin
+} from 'antd';
 
 const { Option } = Select;
 
@@ -12,31 +19,45 @@ class LoginForm extends React.Component {
         super(props);
 
         this.state = {
-            phoneNumber: '',
-            password: ''
+            main: true
         }
     }
 
-    onSubmit = e => {
+    onSubmitTwoFa = e => {
         e.preventDefault();
-        console.log(this.props);
-        this.props.form.validateFields().then(e=>console.log(e))
+
+        this.props
+            .form
+            .validateFields()
+            .then(e => {
+                this.props
+                    .onSubmitTwoFa(e)
+                    .then(resp => {
+                        if (resp && resp.userIdHolder && resp.userIdHolder.userId) {
+                            console.log('r', resp);
+                            this.setState({ main: false })
+                            this.userId = resp.userIdHolder.userId;
+                        }
+                    });
+            });
     }
 
-    render() {
-        const { getFieldDecorator } = this.props.form;
+    onTokenSubmit = e => {
+        e.preventDefault();
 
-        const prefixSelector = getFieldDecorator('prefix', {
-            initialValue: '+380',
-        })(
-            <Select style={{ width: 75 }}>
-                <Option value="+380">+380</Option>
-            </Select>
-        );
+        this.props
+            .form
+            .validateFields()
+            .then(e => {
+                this.props
+                    .onTokenSubmit(this.userId, e.code);
+            });
+    }
 
-        return (
+    renderMainForm = (getFieldDecorator, prefixSelector, loading) => (
+        <Spin spinning={loading}>
             <Form className={classnames('login-form', this.props.className)}
-                onSubmit={this.onSubmit}>
+                onSubmit={this.onSubmitTwoFa}>
                 <Form.Item>
                     {getFieldDecorator('phoneNumber', {
                         rules: [{ required: true, message: 'Please input your phone' }],
@@ -52,24 +73,69 @@ class LoginForm extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item>
-                    {getFieldDecorator('remember', {
-                        valuePropName: 'checked',
-                        initialValue: true,
-                    })(
-                        <Checkbox>Remember me</Checkbox>
-                    )}
                     <a className="login-form-forgot" href="">Forgot password</a>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
+                    <Button type="primary"
+                        htmlType="submit"
+                        className="login-form-button"
+                        disabled={loading}>
                         Log in
-          </Button>
-                    Or <a href="">register now!</a>
+                    </Button>
                 </Form.Item>
             </Form>
+        </Spin>
+    );
+
+    render2FaCodeForm = (getFieldDecorator, loading) => (
+        <Spin spinning={loading}>
+            <Form onSubmit={this.onTokenSubmit}>
+                <Form.Item>
+                    <Alert message="Information!"
+                        description="We have sent confirmation code to your email. Please check your email box and input code below"
+                        type="info" />
+                </Form.Item>
+                <Form.Item>
+                    {getFieldDecorator('code', {
+                        rules: [{
+                            required: true,
+                            message: 'Please input your Code!',
+                            pattern: /^[0-9]{6}$/
+                        }],
+                    })(
+                        <Input prefix={<Icon type="lock"
+                            style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type="number"
+                            placeholder="Code" />
+                    )}
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary"
+                        htmlType="submit"
+                        className="login-form-button"
+                        disabled={loading}>
+                        Send
+                    </Button>
+                </Form.Item>
+            </Form>
+        </Spin>
+    );
+
+    render() {
+        const { getFieldDecorator } = this.props.form;
+        const { loading } = this.props;
+
+        const prefixSelector = getFieldDecorator('prefix', {
+            initialValue: '+380',
+        })(
+            <Select style={{ width: 75 }}>
+                <Option value="+380">+380</Option>
+            </Select>
         );
+
+        if (this.state.main)
+            return this.renderMainForm(getFieldDecorator, prefixSelector, loading);
+
+        return this.render2FaCodeForm(getFieldDecorator, loading);
     }
 }
 
-export default Form.create({
-    mapPropsToFields: (props) => console.log('pr', props),
-
-})(LoginForm);
+export default Form.create()(LoginForm);

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OnlineBanking.BLL.Storages;
 using OnlineBanking.Mapper;
 using OnlineBanking.Extensions.Services;
+using OnlineBanking.Filters.ResourceFilters;
 
 namespace OnlineBanking
 {
@@ -30,8 +31,17 @@ namespace OnlineBanking
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(options => options.Filters.Add<ModelStateFilter>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            {
+                builder
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .AllowCredentials();
+            }));
             services.AddSingleton(provider => Configuration);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDateBaseContext(Configuration, Environment);
             services.AddAutoMapper(mapper => mapper.AddProfile(new AutoMapperProfile()));
             services.AddServices();
@@ -51,7 +61,7 @@ namespace OnlineBanking
             {
                 app.UseHsts();
             }
-
+            app.UseCors("CorsPolicy");
             //app.UseHttpsRedirection();
             app.UseMvc();
         }
