@@ -18,11 +18,9 @@ class AccountProvider extends React.Component {
                 currentUser: this.props.userState.currentUser,
                 userLoading: this.props.userState.userLoading
             }}>
-                <Spin spinning={this.props.userState.userLoading}>
-                    {
-                        this.props.children
-                    }
-                </Spin>
+                {
+                    this.props.children
+                }
             </AccountContext.Provider>
         );
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import BaseContainer from '../BaseContainer';
+import CreditCardsList from '../../components/CreditCardsList/CreditCardsList';
 
-import { AccountContext } from '../../providers/AccountProvider';
 import { connect } from 'react-redux';
 import { fetchCreditCards } from '../../actions/crediCards';
 
@@ -18,10 +18,29 @@ class CreditCardsContainer extends BaseContainer {
     }
 
     render() {
+        console.log(this.props)
+        const { loading, creditCards } = this.props.creditCardsState;
+
         return (
-            <AccountContext.Consumer>
-                {(context) => (<div>{console.log(context)}</div>)}
-            </AccountContext.Consumer>
+            <CreditCardsList
+                loading={loading}
+                list={[
+                    {
+                        id:24,
+                        cardNumber: '6445-456456-456-456'
+                    },
+                    {
+                        id:456,
+                        cardNumber: '6445-456456-456-456'
+                    },
+                    {
+                        id:4,
+                        cardNumber: '6445-456456-456-456'
+                    },{
+                        id:34,
+                        cardNumber: '6445-456456-456-456'
+                    }
+                ]} />
         )
     }
 };
