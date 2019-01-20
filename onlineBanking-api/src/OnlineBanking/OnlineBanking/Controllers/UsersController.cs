@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -37,16 +39,22 @@ namespace OnlineBanking.Controllers
             _emailSendingService = emailSendingService;
         }
 
-        [HttpGet]
+        [HttpGet("getCurrent")]
         [JwtAuthorize]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetCurrent()
         {
-            var user = await _userService.GetFromIdentityAsync(User.Identity.Name);
+            var userHolder = await _userService.GetFromIdentityAsync(User.Identity.Name);
 
-            if (user == null)
+            if (userHolder == null)
                 return Unauthorized();
 
-            return Ok(_mapper.Map<User, UserDto>(user.Data));
+            if (userHolder.Status == DataHolderStatus.Unauthorized)
+                return Unauthorized();
+
+            if (userHolder.Status == DataHolderStatus.Failure)
+                return BadRequest(userHolder.Message);
+
+            return Ok(_mapper.Map<User, UserDto>(userHolder.Data));
         }
 
         [HttpPost("sendUser2fa")]
@@ -69,9 +77,10 @@ namespace OnlineBanking.Controllers
 
             await _emailSendingService.SendAsync(user.Email, "Code", twoFactorToken);
 
-            return Ok(new TwoFactorTokenDto
+            return Ok(new TwoFactorDto
             {
-                UserId = user.Id
+                UserId = user.Id,
+                Roles = (await _userManager.GetRolesAsync(user)).ToList()
             });
         }
 

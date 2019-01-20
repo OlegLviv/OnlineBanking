@@ -4,6 +4,7 @@
     {
         Success,
         Warning,
-        Failure
+        Failure,
+        Unauthorized
     }
 }

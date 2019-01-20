@@ -11,6 +11,7 @@ import {
     Select,
     Spin
 } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { Option } = Select;
 
@@ -33,10 +34,11 @@ class LoginForm extends React.Component {
                 this.props
                     .onSubmitTwoFa(e)
                     .then(resp => {
-                        if (resp && resp.userIdHolder && resp.userIdHolder.userId) {
+                        if (resp && resp.twoFactorInfo && resp.twoFactorInfo.userId) {
                             console.log('r', resp);
                             this.setState({ main: false })
-                            this.userId = resp.userIdHolder.userId;
+                            this.userId = resp.twoFactorInfo.userId;
+                            this.userRoles = resp.twoFactorInfo.roles;
                         }
                     });
             });
@@ -50,7 +52,7 @@ class LoginForm extends React.Component {
             .validateFields()
             .then(e => {
                 this.props
-                    .onTokenSubmit(this.userId, e.code);
+                    .onTokenSubmit(this.userId, e.code, this.userRoles);
             });
     }
 
@@ -73,7 +75,7 @@ class LoginForm extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <a className="login-form-forgot" href="">Forgot password</a>
+                    <Link className="login-form-forgot" to="">Forgot password</Link>
                     <Button type="primary"
                         htmlType="submit"
                         className="login-form-button"

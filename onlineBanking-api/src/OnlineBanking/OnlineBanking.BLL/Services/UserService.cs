@@ -35,6 +35,9 @@ namespace OnlineBanking.BLL.Services
                                              user.Email == identityName ||
                                              user.PhoneNumber == identityName);
 
+            if(userData == null)
+                return DataHolder<User>.CreateUnauthorized();
+
             return DataHolder<User>.CreateSuccess(userData);
         }
 
@@ -47,7 +50,7 @@ namespace OnlineBanking.BLL.Services
                registerUserDto.Passport.FirsPage.Length > MaxFileSize ||
                registerUserDto.Passport.SecondPage.Length > MaxFileSize ||
                registerUserDto.Passport.ResidencePage.Length > MaxFileSize)
-                return DataHolder<User>.CreateFailure(null, $"File size can't be > {MaxFileSize} bytes");
+                return DataHolder<User>.CreateFailure($"File size can't be > {MaxFileSize} bytes");
 
             var user = _mapper.Map<RegisterUserDto, User>(registerUserDto);
             var passportDto = registerUserDto.Passport;
@@ -61,7 +64,7 @@ namespace OnlineBanking.BLL.Services
             var createdStatus = await _userManager.CreateAsync(user, registerUserDto.Password);
 
             if(!createdStatus.Succeeded)
-                return DataHolder<User>.CreateFailure(null, createdStatus.CreateErrorsString());
+                return DataHolder<User>.CreateFailure(createdStatus.CreateErrorsString());
 
             return DataHolder<User>.CreateSuccess(user);
         }

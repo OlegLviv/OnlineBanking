@@ -11,10 +11,7 @@ import { logIn } from '../../api/api';
 import { Row, Col } from 'antd';
 
 class HomeContainer extends BaseContainer {
-    constructor(props) {
-        super(props);
-    }
-
+    
     onSubmitTwoFa = e => this.props.send2FaCode({
         phoneNumber: `${e.prefix}${e.phoneNumber}`,
         password: e.password
@@ -25,12 +22,12 @@ class HomeContainer extends BaseContainer {
             }
         });
 
-    onTokenSubmit = (userId, code) => {
+    onTokenSubmit = (userId, code, userRoles) => {
         this.props
             .fetchToken(userId, code)
             .then(resp => {
                 if (resp.token && resp.token.accessToken) {
-                    logIn(resp.token.accessToken, '/user');
+                    logIn(resp.token.accessToken, `/cab/${userRoles[0]}`);
                 }
             })
             .catch(err => {

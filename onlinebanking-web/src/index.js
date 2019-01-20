@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import reducers from './reducers/index';
 import thunk from 'redux-thunk';
 import 'antd/dist/antd.css';
+import './index.css';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';

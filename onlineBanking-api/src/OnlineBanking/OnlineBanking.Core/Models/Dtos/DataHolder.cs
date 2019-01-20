@@ -1,6 +1,6 @@
 ﻿namespace OnlineBanking.Core.Models.Dtos
 {
-    public class DataHolder<TData>
+    public class DataHolder<TData> where TData : class
     {
         public TData Data { get; set; }
 
@@ -16,12 +16,20 @@
                 Message = "Success"
             };
 
-        public static DataHolder<TData> CreateFailure(TData data, string message)
-        => new DataHolder<TData>
-        {
-            Data = data,
-            Status = DataHolderStatus.Failure,
-            Message = message
-        };
+        public static DataHolder<TData> CreateFailure(string message, TData data = null)
+            => new DataHolder<TData>
+            {
+                Data = data,
+                Status = DataHolderStatus.Failure,
+                Message = message
+            };
+
+        public static DataHolder<TData> CreateUnauthorized()
+            => new DataHolder<TData>
+            {
+                Data = null,
+                Status = DataHolderStatus.Unauthorized,
+                Message = "Unauthorized"
+            };
     }
 }
