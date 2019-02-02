@@ -4,7 +4,10 @@ export default {
     getCreditCards() {
         return apiGet('/api/creditCards');
     },
-    createOrder(body){
+    getCreditCard(id) {
+        return apiGet(`/api/creditCards/${id}`);
+    },
+    createOrder(body) {
         return apiPost('/api/creditCards/createOrder', body);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,25 @@ namespace OnlineBanking.Controllers
                 return BadRequest(userHolder.Message);
 
             return Ok(_mapper.Map<List<CreditCard>, List<CreditCardDto>>(userHolder.Data.CreditCards));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid? id)
+        {
+            if (id == null || id == Guid.Empty)
+                return BadRequest("Invalid id");
+
+            var userIdHolder = await _userService.GetUserId(User.Identity.Name);
+
+            if (userIdHolder.Status == DataHolderStatus.Unauthorized)
+                return Unauthorized();
+
+            var creditCardHolder = await _creditCardService.GetById(id.Value, new Guid(userIdHolder.Data));
+
+            if (creditCardHolder.Status == DataHolderStatus.Failure)
+                return BadRequest(creditCardHolder.Message);
+
+            return Ok(_mapper.Map<CreditCard, CreditCardDto>(creditCardHolder.Data));
         }
 
         [HttpPost("createOrder")]

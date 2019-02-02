@@ -5,7 +5,11 @@ import {
 
     CREATE_ORDER_REQUEST,
     CREATE_ORDER_SUCCESS,
-    CREATE_ORDER_FAILURE
+    CREATE_ORDER_FAILURE,
+
+    FETCH_CREDIT_CARD_REQUEST,
+    FETCH_CREDIT_CARD_SUCCESS,
+    FETCH_CREDIT_CARD_FAILURE
 } from '../actions/crediCards';
 
 const defaultState = {
@@ -20,6 +24,7 @@ export default (state = defaultState, action) => {
     switch (action.type) {
         case FETCH_CREDIT_CARDS_REQUEST:
         case CREATE_ORDER_REQUEST:
+        case FETCH_CREDIT_CARD_REQUEST:
             return {
                 ...state,
                 loading: true
@@ -31,6 +36,13 @@ export default (state = defaultState, action) => {
                 loading: false,
                 creditCards: action.creditCards
             };
+
+        case FETCH_CREDIT_CARD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                creditCard: action.creditCard
+            };
         case CREATE_ORDER_SUCCESS:
             return {
                 ...state,
@@ -40,6 +52,7 @@ export default (state = defaultState, action) => {
 
         case FETCH_CREDIT_CARDS_FAILURE:
         case CREATE_ORDER_FAILURE:
+        case FETCH_CREDIT_CARD_FAILURE:
             return {
                 ...state,
                 loading: false,

@@ -10,14 +10,15 @@ namespace OnlineBanking.Core.Models.DomainModels.CreditCard
 
         public Guid UserId { get; set; }
 
-        [Required]
-        [CreditCard]
+        [Required, CreditCard]
         public string CardNumber { get; set; }
 
         public DateTime Expired { get; set; }
 
-        [MinLength(100)]
-        [MaxLength(999)]
+        [MinLength(100), MaxLength(999)]
         public int Cvv { get; set; }
+
+        [Range((int)CreditCardType.Visa, (int)CreditCardType.MasterCard)]
+        public CreditCardType Type { get; set; }
     }
 }

@@ -24,7 +24,7 @@ class OrderCreditCardForm extends React.Component {
 
     renderAddressDeliveryForm = () => {
         const { getFieldDecorator } = this.props.form;
-
+        
         return (
             <>
                 <Form.Item>
@@ -56,7 +56,7 @@ class OrderCreditCardForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
 
         return (
-            <Form onSubmit={this.onCreateOrder} className="login-form">
+            <Form onSubmit={this.onCreateOrder}>
                 <Form.Item>
                     {getFieldDecorator('deliveryType', {
                         rules: [{ required: true, message: 'Please input choose devilery type' }],

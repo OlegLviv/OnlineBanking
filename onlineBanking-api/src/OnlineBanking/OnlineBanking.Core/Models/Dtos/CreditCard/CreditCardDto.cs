@@ -1,4 +1,5 @@
 ﻿using System;
+using OnlineBanking.Core.Models.DomainModels.CreditCard;
 
 namespace OnlineBanking.Core.Models.Dtos.CreditCard
 {
@@ -10,6 +11,6 @@ namespace OnlineBanking.Core.Models.Dtos.CreditCard
 
         public DateTime Expired { get; set; }
 
-        public int Cvv { get; set; }
+        public CreditCardType Type { get; set; }
     }
 }

@@ -18,29 +18,13 @@ class CreditCardsContainer extends BaseContainer {
     }
 
     render() {
-        console.log(this.props)
         const { loading, creditCards } = this.props.creditCardsState;
 
         return (
             <CreditCardsList
+                match={this.props.match}
                 loading={loading}
-                list={[
-                    {
-                        id:24,
-                        cardNumber: '6445-456456-456-456'
-                    },
-                    {
-                        id:456,
-                        cardNumber: '6445-456456-456-456'
-                    },
-                    {
-                        id:4,
-                        cardNumber: '6445-456456-456-456'
-                    },{
-                        id:34,
-                        cardNumber: '6445-456456-456-456'
-                    }
-                ]} />
+                list={creditCards} />
         )
     }
 };

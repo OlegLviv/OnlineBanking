@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using OnlineBanking.BLL.Services.Abstract;
 using OnlineBanking.Core.Models.DomainModels.CreditCard;
 using OnlineBanking.Core.Models.DomainModels.User;
@@ -13,11 +15,15 @@ namespace OnlineBanking.BLL.Services
     {
         private readonly IRepository<CreditCardOrder> _creditCardOrderRepository;
         private readonly IMapper _mapper;
+        private readonly IRepository<CreditCard> _creditCardRepository;
 
-        public CreditCardService(IRepository<CreditCardOrder> creditCardOrderRepository, IMapper mapper)
+        public CreditCardService(IRepository<CreditCardOrder> creditCardOrderRepository,
+            IMapper mapper,
+            IRepository<CreditCard> creditCardRepository)
         {
             _creditCardOrderRepository = creditCardOrderRepository;
             _mapper = mapper;
+            _creditCardRepository = creditCardRepository;
         }
 
         public async Task<DataHolder<CreditCardOrder>> CreateOrderAsync(CreateCreditCardOrderDto dto, User user)
@@ -39,6 +45,18 @@ namespace OnlineBanking.BLL.Services
                 return DataHolder<CreditCardOrder>.CreateFailure("Cant create order");
 
             return DataHolder<CreditCardOrder>.CreateSuccess(creditCardOrder);
+        }
+
+        public async Task<DataHolder<CreditCard>> GetById(Guid id, Guid userId)
+        {
+            var creditCard = await _creditCardRepository
+                .Table
+                .FirstOrDefaultAsync(card => card.UserId == userId && id == card.Id);
+
+            if(creditCard == null)
+                return DataHolder<CreditCard>.CreateFailure("Card doesn't exist");
+
+            return DataHolder<CreditCard>.CreateSuccess(creditCard);
         }
     }
 }

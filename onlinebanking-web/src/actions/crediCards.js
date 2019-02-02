@@ -10,6 +10,10 @@ export const CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST';
 export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
 export const CREATE_ORDER_FAILURE = 'CREATE_ORDER_FAILURE';
 
+export const FETCH_CREDIT_CARD_REQUEST = 'FETCH_CREDIT_CARD_REQUEST';
+export const FETCH_CREDIT_CARD_SUCCESS = 'FETCH_CREDIT_CARD_SUCCESS';
+export const FETCH_CREDIT_CARD_FAILURE = 'FETCH_CREDIT_CARD_FAILURE';
+
 const fetchCreditCardsRequest = () => ({
     type: FETCH_CREDIT_CARDS_REQUEST
 });
@@ -58,5 +62,30 @@ export const createOrder = body => async dispatch => {
         .then(
             resp => dispatch(createOrderSuccess(resp.data)),
             error => handleError(dispatch, error, createOrderFailure)
+        );
+};
+
+const fetchCreditCardRequest = () => ({
+    type: FETCH_CREDIT_CARD_REQUEST
+});
+
+const fetchCReditCardSuccess = creditCard => ({
+    type: FETCH_CREDIT_CARD_SUCCESS,
+    creditCard
+});
+
+const fetchCreditCardFailure = error => ({
+    type: FETCH_CREDIT_CARD_FAILURE,
+    error
+});
+
+export const fetchCreditCard = id => dispatch => {
+    dispatch(fetchCreditCardRequest());
+
+    return creditCardsService
+        .getCreditCard(id)
+        .then(
+            resp => dispatch(fetchCReditCardSuccess(resp.data)),
+            error => handleError(dispatch, error, fetchCreditCardFailure)
         );
 }

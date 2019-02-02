@@ -3,14 +3,16 @@ import CabinetLayout from '../../layouts/CabinetLayout/CabinetLayout';
 import CreditCardsContainer from '../../containers/CreditCardsContainer/CreditCardsContainer';
 import AccountProvider from '../../providers/AccountProvider';
 import OrderCreditCardContainer from '../../containers/OrderCreditCardContainer/OrderCreditCardContainer';
+import CreditCardContainer from '../../containers/CreditCardContainer/CreditCardContainer';
+import CreditCardEditPin from '../../containers/CreditCardEditPin/CreditCardEditPin';
 
 import { Switch, Route } from 'react-router-dom';
 
-const userRoles = {
-    admin: 'admin',
-    manager: 'manager',
-    user: 'user'
-};
+// const userRoles = {
+//     admin: 'admin',
+//     manager: 'manager',
+//     user: 'user'
+// };
 
 class CabinetScreen extends React.Component {
 
@@ -21,8 +23,10 @@ class CabinetScreen extends React.Component {
             <CabinetLayout role={match.params.role}>
                 <AccountProvider>
                     <Switch>
-                        <Route path={`/cab/${userRoles.user}/credit-cards/list`} component={CreditCardsContainer} />
-                        <Route path={`/cab/${userRoles.user}/credit-cards/order`} component={OrderCreditCardContainer} />
+                        <Route path={`/cab/:role/credit-cards/list`} component={CreditCardsContainer} />
+                        <Route path={`/cab/:role/credit-cards/order`} component={OrderCreditCardContainer} />
+                        <Route exact path="/cab/:role/credit-card/:id" component={CreditCardContainer} />
+                        <Route path="/cab/:role/credit-card/:id/change-pin" component={CreditCardEditPin} />
                     </Switch>
                 </AccountProvider>
             </CabinetLayout>

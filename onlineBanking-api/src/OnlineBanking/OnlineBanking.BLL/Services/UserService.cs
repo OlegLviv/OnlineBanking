@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -39,6 +40,23 @@ namespace OnlineBanking.BLL.Services
                 return DataHolder<User>.CreateUnauthorized();
 
             return DataHolder<User>.CreateSuccess(userData);
+        }
+
+        public async Task<DataHolder<string>> GetUserId(string identityName)
+        {
+            if (identityName == null)
+                throw new ArgumentNullException(nameof(identityName));
+
+            var userId = await _userManager
+                .Users
+                .Where(user => user.UserName == identityName || user.Email == identityName)
+                .Select(user => user.Id)
+                .FirstOrDefaultAsync();
+
+            if(userId == Guid.Empty)
+                return DataHolder<string>.CreateUnauthorized();
+
+            return DataHolder<string>.CreateSuccess(userId.ToString());
         }
 
         public async Task<DataHolder<User>> RegisterUserAsync(RegisterUserDto registerUserDto)
