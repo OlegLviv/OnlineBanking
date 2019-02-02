@@ -35,7 +35,7 @@ class CabinetLayout extends React.Component {
                         mode="inline"
                         defaultSelectedKeys={['1']}
                     >
-                        <Menu.SubMenu key="1" title={<span className="nav-text"><Icon type="credit-card" />Credit cards</span>}>
+                        <Menu.SubMenu key="1" title={<span><Icon type="credit-card" />Credit cards</span>}>
                             <Menu.Item key="11">
                                 <Link to={`/cab/${this.props.role}/credit-cards/list`}>
                                     <span className="nav-text">My credit cards</span>

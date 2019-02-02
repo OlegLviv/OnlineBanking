@@ -12,5 +12,7 @@ namespace OnlineBanking.Core.Models.Dtos.CreditCard
         public DateTime Expired { get; set; }
 
         public CreditCardType Type { get; set; }
+
+        public int CreditLimit { get; set; }
     }
 }

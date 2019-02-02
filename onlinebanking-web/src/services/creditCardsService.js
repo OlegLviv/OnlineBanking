@@ -1,4 +1,4 @@
-import { apiGet, apiPost } from '../api/api';
+import { apiGet, apiPost, apiPut } from '../api/api';
 
 export default {
     getCreditCards() {
@@ -9,5 +9,11 @@ export default {
     },
     createOrder(body) {
         return apiPost('/api/creditCards/createOrder', body);
+    },
+    changePin(body) {
+        return apiPut('/api/creditCards/changePin', body);
+    },
+    changeCreditLimit(body) {
+        return apiPut('/api/creditCards/changeCreditLimit', body);
     }
 }

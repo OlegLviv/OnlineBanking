@@ -20,5 +20,11 @@ namespace OnlineBanking.Core.Models.DomainModels.CreditCard
 
         [Range((int)CreditCardType.Visa, (int)CreditCardType.MasterCard)]
         public CreditCardType Type { get; set; }
+
+        [Range(0, 9999)]
+        public int Pin { get; set; }
+
+        [Range(0, 100000)]
+        public int CreditLimit { get; set; }
     }
 }

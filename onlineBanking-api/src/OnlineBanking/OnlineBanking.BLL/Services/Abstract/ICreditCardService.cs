@@ -12,5 +12,9 @@ namespace OnlineBanking.BLL.Services.Abstract
         Task<DataHolder<CreditCardOrder>> CreateOrderAsync(CreateCreditCardOrderDto dto, User user);
 
         Task<DataHolder<CreditCard>> GetById(Guid id, Guid userId);
+
+        Task<DataHolder<CreditCard>> ChangePinAsync(ChangePinDto pinDto, Guid userId);
+
+        Task<DataHolder<CreditCard>> ChangeCreditLimitAsync(ChangeCreditLimitDto limitDto, Guid userId);
     }
 }

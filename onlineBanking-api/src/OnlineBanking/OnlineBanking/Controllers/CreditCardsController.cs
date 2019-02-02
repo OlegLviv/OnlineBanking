@@ -78,5 +78,44 @@ namespace OnlineBanking.Controllers
 
             return Ok(_mapper.Map<CreditCardOrder, CreditCardOrderDto>(createResult.Data));
         }
+
+        #region PUT
+
+        [HttpPut("changePin")]
+        public async Task<IActionResult> ChangePin([FromBody] ChangePinDto pinDto)
+        {
+            if (pinDto.NewPin < 1000 || pinDto.NewPin > 9999)
+                return BadRequest("Invalid pin");
+
+            var userIdHolder = await _userService.GetUserId(User.Identity.Name);
+
+            if (userIdHolder.Status == DataHolderStatus.Unauthorized)
+                return Unauthorized();
+
+            var cardHolder = await _creditCardService.ChangePinAsync(pinDto, new Guid(userIdHolder.Data));
+
+            if (cardHolder.Status == DataHolderStatus.Failure)
+                return BadRequest(cardHolder.Message);
+
+            return Ok(_mapper.Map<CreditCard, CreditCardDto>(cardHolder.Data));
+        }
+
+
+        [HttpPut("changeCreditLimit")]
+        public async Task<IActionResult> ChangeCreditLimit([FromBody] ChangeCreditLimitDto creditLimitDto)
+        {
+            var userIdHolder = await _userService.GetUserId(User.Identity.Name);
+
+            if (userIdHolder.Status == DataHolderStatus.Unauthorized)
+                return Unauthorized();
+
+            var cardHolder = await _creditCardService.ChangeCreditLimitAsync(creditLimitDto, new Guid(userIdHolder.Data));
+
+            if (cardHolder.Status == DataHolderStatus.Failure)
+                return BadRequest(cardHolder.Message);
+
+            return Ok(_mapper.Map<CreditCard, CreditCardDto>(cardHolder.Data));
+        }
+        #endregion
     }
 }

@@ -27,10 +27,19 @@ namespace OnlineBanking.DAL.Initializators
                 {
                     new CreditCard
                     {
-                        CardNumber = "53234352342346",
+                        CardNumber = "5323435234234624",
                         Expired = DateTime.UtcNow.AddYears(2),
                         Cvv = 123,
-                        Type = CreditCardType.MasterCard
+                        Type = CreditCardType.MasterCard,
+                        CreditLimit = 30000
+                    },
+                    new CreditCard
+                    {
+                        CardNumber = "3423986987658906",
+                        Expired = DateTime.UtcNow.AddYears(3),
+                        Cvv = 187,
+                        Type = CreditCardType.Visa,
+                        CreditLimit = 10000
                     }
                 }
             };
