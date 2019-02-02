@@ -12,6 +12,7 @@ namespace OnlineBanking.Extensions.Services
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             serviceCollection.AddScoped<IEmailSendingService, EmailSendingService>();
             serviceCollection.AddScoped<IUserService, UserService>();
+            serviceCollection.AddScoped<ICreditCardService, CreditCardService>();
         }
     }
 }

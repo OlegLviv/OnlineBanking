@@ -4865,7 +4865,8 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "AutoMapper": "8.0.0",
-          "OnlineBanking.Core": "1.0.0"
+          "OnlineBanking.Core": "1.0.0",
+          "OnlineBanking.DAL": "1.0.0"
         },
         "compile": {
           "bin/placeholder/OnlineBanking.BLL.dll": {}

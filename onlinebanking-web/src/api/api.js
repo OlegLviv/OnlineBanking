@@ -2,9 +2,9 @@ import api from 'axios';
 
 export const ACCESS_TOKE = 'token';
 
-const PROTOCOL = 'http';
+const PROTOCOL = 'https';
 const HOST_NAME = 'localhost';
-const PORT = 5000;
+const PORT = 44376;
 const PROD_PROTOCOL = 'https';
 const PROD_HOST_NAME = '';
 

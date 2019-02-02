@@ -2,6 +2,7 @@ import React from 'react';
 import CabinetLayout from '../../layouts/CabinetLayout/CabinetLayout';
 import CreditCardsContainer from '../../containers/CreditCardsContainer/CreditCardsContainer';
 import AccountProvider from '../../providers/AccountProvider';
+import OrderCreditCardContainer from '../../containers/OrderCreditCardContainer/OrderCreditCardContainer';
 
 import { Switch, Route } from 'react-router-dom';
 
@@ -20,7 +21,8 @@ class CabinetScreen extends React.Component {
             <CabinetLayout role={match.params.role}>
                 <AccountProvider>
                     <Switch>
-                        <Route path={`/cab/${userRoles.user}/credit-cards`} component={CreditCardsContainer} />
+                        <Route path={`/cab/${userRoles.user}/credit-cards/list`} component={CreditCardsContainer} />
+                        <Route path={`/cab/${userRoles.user}/credit-cards/order`} component={OrderCreditCardContainer} />
                     </Switch>
                 </AccountProvider>
             </CabinetLayout>

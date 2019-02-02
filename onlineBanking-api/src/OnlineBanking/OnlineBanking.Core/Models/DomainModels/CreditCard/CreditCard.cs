@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using OnlineBanking.Core.Models.DomainModels.Abstract;
 
-namespace OnlineBanking.Core.Models.DomainModels.User
+namespace OnlineBanking.Core.Models.DomainModels.CreditCard
 {
     public class CreditCard : Entity
     {
-        public virtual User User { get; set; }
+        public virtual User.User User { get; set; }
 
         public Guid UserId { get; set; }
 

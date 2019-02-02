@@ -10,7 +10,7 @@
       "NETCOREAPP",
       "NETCOREAPP2_2"
     ],
-    "languageVersion": "",
+    "languageVersion": "7.3",
     "platform": "",
     "allowUnsafe": false,
     "warningsAsErrors": false,
@@ -725,7 +725,8 @@
       "OnlineBanking.BLL/1.0.0": {
         "dependencies": {
           "AutoMapper": "8.0.0",
-          "OnlineBanking.Core": "1.0.0"
+          "OnlineBanking.Core": "1.0.0",
+          "OnlineBanking.DAL": "1.0.0"
         },
         "runtime": {
           "OnlineBanking.BLL.dll": {}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using OnlineBanking.Core.Models.DomainModels.Abstract;
+using OnlineBanking.Core.Models.DomainModels.CreditCard;
 
 namespace OnlineBanking.Core.Models.DomainModels.User
 {
@@ -29,6 +30,8 @@ namespace OnlineBanking.Core.Models.DomainModels.User
 
         public virtual Passport Passport { get; set; }
 
-        public virtual List<CreditCard> CreditCards { get; set; }
+        public virtual List<CreditCard.CreditCard> CreditCards { get; set; }
+
+        public virtual List<CreditCardOrder> CreditCardOrders { get; set; }
     }
 }

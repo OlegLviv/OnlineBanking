@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineBanking.Core\OnlineBanking.Core.csproj" />
+    <ProjectReference Include="..\OnlineBanking.DAL\OnlineBanking.DAL.csproj" />
   </ItemGroup>
 
 </Project>

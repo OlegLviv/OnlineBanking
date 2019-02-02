@@ -4,8 +4,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using OnlineBanking.BLL.Services.Abstract;
 using OnlineBanking.Core.Models;
-using OnlineBanking.Core.Models.DomainModels.User;
-using OnlineBanking.Core.Models.Dtos.User;
+using OnlineBanking.Core.Models.DomainModels.CreditCard;
+using OnlineBanking.Core.Models.Dtos.CreditCard;
 using OnlineBanking.Filters.AuthorizationFilters;
 
 namespace OnlineBanking.Controllers
@@ -17,11 +17,13 @@ namespace OnlineBanking.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly ICreditCardService _creditCardService;
 
-        public CreditCardsController(IUserService userService, IMapper mapper)
+        public CreditCardsController(IUserService userService, IMapper mapper, ICreditCardService creditCardService)
         {
             _userService = userService;
             _mapper = mapper;
+            _creditCardService = creditCardService;
         }
 
         [HttpGet]
@@ -39,6 +41,22 @@ namespace OnlineBanking.Controllers
                 return BadRequest(userHolder.Message);
 
             return Ok(_mapper.Map<List<CreditCard>, List<CreditCardDto>>(userHolder.Data.CreditCards));
+        }
+
+        [HttpPost("createOrder")]
+        public async Task<IActionResult> CreateOrder([FromBody] CreateCreditCardOrderDto model)
+        {
+            var user = await _userService.GetFromIdentityAsync(User.Identity.Name);
+
+            if (user.Status == DataHolderStatus.Unauthorized)
+                return Unauthorized();
+
+            var createResult = await _creditCardService.CreateOrderAsync(model, user.Data);
+
+            if (createResult.Status == DataHolderStatus.Failure)
+                return BadRequest(createResult.Message);
+
+            return Ok(_mapper.Map<CreditCardOrder, CreditCardOrderDto>(createResult.Data));
         }
     }
 }

@@ -17,8 +17,9 @@ class HomeContainer extends BaseContainer {
         password: e.password
     })
         .catch(err => {
-            if (err.response && err.response.status === 400) {
-                this.setState({ errorMessage: err.response.data });
+            if (err && err.status === 400) {
+                this.setState({ errorMessage: err.data });
+                console.log('asdasd',err)
             }
         });
 
@@ -32,8 +33,8 @@ class HomeContainer extends BaseContainer {
             })
             .catch(err => {
                 console.log(err);
-                if (err.response && err.response.status === 400) {
-                    this.setState({ errorMessage: err.response.data });
+                if (err && err.status === 400) {
+                    this.setState({ errorMessage: err.data });
                 }
             });
     }

@@ -29,7 +29,7 @@ namespace OnlineBanking.DAL
         {
             try
             {
-                entities.ToList().ForEach(async entity => await Entities.AddAsync(entity));
+                await Entities.AddRangeAsync(entities);
 
                 return await _context.SaveChangesAsync();
             }
