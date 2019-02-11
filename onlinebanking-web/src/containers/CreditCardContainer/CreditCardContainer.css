@@ -1,0 +1,37 @@
+.credit-card-box {
+    padding: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.credit-card {
+    width: 30rem;
+}
+
+.balance-box{
+    padding: 1rem 0;
+}
+
+.icon-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pad{
+    padding: .3rem 0;
+}
+
+.pad-l{
+    padding-left: 1rem;
+}
+
+.pad-top{
+    padding-top: 1rem;
+}

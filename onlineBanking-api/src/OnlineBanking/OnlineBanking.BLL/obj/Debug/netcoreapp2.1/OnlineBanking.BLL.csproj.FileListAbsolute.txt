@@ -1,0 +1,14 @@
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.csprojAssemblyReference.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.csproj.CoreCompileInputs.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.AssemblyInfoInputs.cache
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.AssemblyInfo.cs
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.BLL.deps.json
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.BLL.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.BLL.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.Core.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.DAL.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.Core.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\bin\Debug\netcoreapp2.1\OnlineBanking.DAL.pdb
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.csproj.CopyComplete
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.dll
+C:\Users\Spudi\Documents\OnlineBanking\onlineBanking-api\src\OnlineBanking\OnlineBanking.BLL\obj\Debug\netcoreapp2.1\OnlineBanking.BLL.pdb
