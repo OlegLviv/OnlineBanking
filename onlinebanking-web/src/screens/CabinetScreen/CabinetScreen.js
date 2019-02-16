@@ -6,6 +6,7 @@ import OrderCreditCardContainer from '../../containers/OrderCreditCardContainer/
 import CreditCardContainer from '../../containers/CreditCardContainer/CreditCardContainer';
 import CreditCardEditPinContainer from '../../containers/CreditCardEditPinContainer/CreditCardEditPinContainer';
 import CreditCardChangeCreditLimitContainer from '../../containers/CreditCardChangeCreditLimitContainer/CreditCardChangeCreditLimitContainer'
+import DepositContainer from '../../containers/DepositContainer/DepositContainer';
 
 import { Switch, Route } from 'react-router-dom';
 
@@ -29,6 +30,7 @@ class CabinetScreen extends React.Component {
                         <Route exact path="/cab/:role/credit-card/:id" component={CreditCardContainer} />
                         <Route path="/cab/:role/credit-card/:id/change-pin" component={CreditCardEditPinContainer} />
                         <Route path="/cab/:role/credit-card/:id/change-c-limit" component={CreditCardChangeCreditLimitContainer} />
+                        <Route path="/cab/:role/deposit/:currency" component={DepositContainer} />
                     </Switch>
                 </AccountProvider>
             </CabinetLayout>

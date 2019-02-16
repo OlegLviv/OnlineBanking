@@ -1,27 +1,40 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using OnlineBanking.BLL.Services.Abstract;
 using OnlineBanking.Core.Models;
-using OnlineBanking.Core.Models.DomainModels.Deposit;
 using OnlineBanking.Core.Models.Dtos.Deposit;
+using OnlineBanking.Filters.AuthorizationFilters;
 
 namespace OnlineBanking.Controllers
 {
     [Route("/api/[controller]"), ApiController]
+    [JwtAuthorize]
     public class DepositsController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IDepositService _depositService;
-        private readonly IMapper _mapper;
 
-        public DepositsController(IDepositService depositService, IUserService userService, IMapper mapper)
+        public DepositsController(IDepositService depositService, IUserService userService)
         {
             _depositService = depositService;
             _userService = userService;
-            _mapper = mapper;
         }
+
+        [HttpGet("DepositTypes/{currency}")]
+        public async Task<IActionResult> GetDepositTypes(string currency)
+        {
+            if (string.IsNullOrWhiteSpace(currency))
+                return BadRequest("Incorrect currency");
+
+            var depositTypesHolder = await _depositService.GetDepositTypesAsync(currency);
+
+            if (depositTypesHolder.Status == DataHolderStatus.Failure)
+                return BadRequest(depositTypesHolder.Message);
+
+            return Ok(depositTypesHolder.Data);
+        }
+
 
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] CreateDepositDto createDepositDto)
@@ -36,7 +49,7 @@ namespace OnlineBanking.Controllers
             if (createdHolder.Status == DataHolderStatus.Failure)
                 return BadRequest(createdHolder.Message);
 
-            return Ok(_mapper.Map<Deposit, DepositTypeDto>(createdHolder.Data));
+            return Ok(createdHolder.Data);
         }
     }
 }
