@@ -13,5 +13,7 @@ namespace OnlineBanking.Core.Models.Dtos.Deposit
         public string Name { get; set; }
 
         public double Percentages { get; set; }
+
+        public bool IsTaken { get; set; }
     }
 }

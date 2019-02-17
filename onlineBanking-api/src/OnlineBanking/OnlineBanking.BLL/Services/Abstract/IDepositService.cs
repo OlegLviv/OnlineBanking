@@ -10,6 +10,6 @@ namespace OnlineBanking.BLL.Services.Abstract
     {
         Task<DataHolder<DepositDto>> CreateDepositAsync(CreateDepositDto depositDto, Guid userId);
 
-        Task<DataHolder<ICollection<DepositTypeDto>>> GetDepositTypesAsync(string currency);
+        Task<DataHolder<ICollection<DepositTypeDto>>> GetDepositTypesAsync(string currency, Guid userId);
     }
 }

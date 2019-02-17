@@ -27,14 +27,18 @@ namespace OnlineBanking.Controllers
             if (string.IsNullOrWhiteSpace(currency))
                 return BadRequest("Incorrect currency");
 
-            var depositTypesHolder = await _depositService.GetDepositTypesAsync(currency);
+            var userIdHolder = await _userService.GetUserId(User.Identity.Name);
+
+            if (userIdHolder.Status == DataHolderStatus.Unauthorized)
+                return Unauthorized();
+
+            var depositTypesHolder = await _depositService.GetDepositTypesAsync(currency, new Guid(userIdHolder.Data));
 
             if (depositTypesHolder.Status == DataHolderStatus.Failure)
                 return BadRequest(depositTypesHolder.Message);
 
             return Ok(depositTypesHolder.Data);
         }
-
 
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] CreateDepositDto createDepositDto)

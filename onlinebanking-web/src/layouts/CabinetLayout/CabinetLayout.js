@@ -79,6 +79,11 @@ class CabinetLayout extends React.Component {
                                     <span className="nav-text">Grivna</span>
                                 </Link>
                             </Menu.Item>
+                            <Menu.Item key="34">
+                                <Link to={`/cab/${this.props.role}/deposits`}>
+                                    <span className="nav-text">My deposits</span>
+                                </Link>
+                            </Menu.Item>
                         </Menu.SubMenu>
                         <Menu.Item key="4">
                             <Icon type="appstore" />
