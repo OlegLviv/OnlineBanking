@@ -78,6 +78,17 @@ namespace OnlineBanking.BLL.Services
             return DataHolder<ICollection<DepositTypeDto>>.CreateSuccess(depositTypes);
         }
 
+        public async Task<DataHolder<ICollection<DepositDto>>> GetDepositsAsync(Guid userId)
+        {
+            var deposits = await _depositRepository
+                .Table
+                .Where(deposit => deposit.UserId == userId)
+                .ToListAsync();
+
+            return DataHolder<ICollection<DepositDto>>.CreateSuccess(_mapper.Map<List<Deposit>, List<DepositDto>>(deposits));
+        }
+
+
         private async Task<bool> CanUserOpenDepositAsync(Guid userId, Guid depositTypeId)
         {
             var user = await _userRepository.GetByIdAsync(userId);

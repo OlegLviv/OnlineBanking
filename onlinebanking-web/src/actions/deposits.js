@@ -5,6 +5,10 @@ export const FETCH_DEPOSIT_TYPES_REQUEST = 'FETCH_DEPOSIT_TYPES_REQUEST';
 export const FETCH_DEPOSIT_TYPES_SUCCESS = 'FETCH_DEPOSIT_TYPES_SUCCESS';
 export const FETCH_DEPOSIT_TYPES_FAILURE = 'FETCH_DEPOSIT_TYPES_FAILURE';
 
+export const FETCH_DEPOSITS_REQUEST = 'FETCH_DEPOSITS_REQUEST';
+export const FETCH_DEPOSITS_SUCCESS = 'FETCH_DEPOSITS_SUCCESS';
+export const FETCH_DEPOSITS_FAILURE = 'FETCH_DEPOSITS_FAILURE';
+
 export const CREATE_DEPOSIT_REQUEST = 'CREATE_DEPOSIT_REQUEST';
 export const CREATE_DEPOSIT_SUCCESS = 'CREATE_DEPOSIT_SUCCESS';
 export const CREATE_DEPOSIT_FAILURE = 'CREATE_DEPOSIT_FAILURE';
@@ -57,4 +61,29 @@ export const createDeposit = body => async dispatch => {
             resp => dispatch(createDepositSuccess(resp.data)),
             error => handleError(dispatch, error, createDepositFailure)
         );
-}
+};
+
+const fetchDepositsRequest = () => ({
+    type: FETCH_DEPOSITS_REQUEST
+});
+
+const fethcDepositsSuccess = deposits => ({
+    type: FETCH_DEPOSITS_SUCCESS,
+    deposits
+});
+
+const fetchDepositsFailure = error => ({
+    type: FETCH_DEPOSITS_FAILURE,
+    error
+});
+
+export const fetchDeposits = () => async dispatch => {
+    dispatch(fetchDepositsRequest());
+
+    return depositsService
+        .getDeposits()
+        .then(
+            resp => dispatch(fethcDepositsSuccess(resp.data)),
+            err => handleError(dispatch, err, fetchDepositsFailure)
+        );
+};

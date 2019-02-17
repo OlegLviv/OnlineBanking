@@ -21,6 +21,19 @@ namespace OnlineBanking.Controllers
             _userService = userService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var userIdHolder = await _userService.GetUserId(User.Identity.Name);
+
+            if (userIdHolder.Status == DataHolderStatus.Unauthorized)
+                return Unauthorized();
+
+            return Ok((await _depositService
+                .GetDepositsAsync(new Guid(userIdHolder.Data)))
+                .Data);
+        }
+
         [HttpGet("DepositTypes/{currency}")]
         public async Task<IActionResult> GetDepositTypes(string currency)
         {

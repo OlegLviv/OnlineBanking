@@ -1,15 +1,15 @@
 .inline-link{
     display: inline-block;
 }
-
 .w-100{
     width: 100%;
 }
-
 .f-bold{
     font-weight: bold;
 }
-
 .p-r-l-10{
     padding: 0 10%;
+}
+.m-r-l-10{
+    margin: 0 10%;
 }
