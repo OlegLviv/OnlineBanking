@@ -3,3 +3,5 @@ export const dateToExpireCard = date => {
 
     return `${dateSplited[2]}/${dateSplited[3]}`
 }
+
+export const toMinuteAndSeconds = date => `${date.getMinutes()}:${date.getSeconds()}`;

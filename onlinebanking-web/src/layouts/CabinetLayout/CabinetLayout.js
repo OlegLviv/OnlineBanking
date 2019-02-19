@@ -5,10 +5,13 @@ import './CabinetLayout.css';
 import { Menu, Icon, Layout } from 'antd';
 import { Link } from 'react-router-dom';
 import { currencyCode } from '../../utils/moneyUtils';
+import { logOut } from '../../api/api';
 
 // const SubMenu = Menu.SubMenu;
 const {
-    Content, Footer, Sider,
+    Content,
+    Footer,
+    Sider,
 } = Layout;
 
 class CabinetLayout extends React.Component {
@@ -20,9 +23,9 @@ class CabinetLayout extends React.Component {
         }
     }
 
-    onCollapse = collapsed => {
-        this.setState({ collapsed });
-    }
+    onCollapse = collapsed => this.setState({ collapsed });
+
+    logOut = () => logOut();
 
     render() {
         return (
@@ -88,6 +91,12 @@ class CabinetLayout extends React.Component {
                         <Menu.Item key="4">
                             <Icon type="appstore" />
                             <span className="nav-text">Other</span>
+                        </Menu.Item>
+                        <Menu.Item key="5">
+                            <Icon type="logout" />
+                            <span
+                                className="nav-text"
+                                onClick={this.logOut}>Log out</span>
                         </Menu.Item>
                     </Menu>
                 </Sider>

@@ -85,6 +85,12 @@ namespace OnlineBanking.Controllers
             return Ok(_mapper.Map<CreditCardOrder, CreditCardOrderDto>(createResult.Data));
         }
 
+        //[HttpPost("sendMoneyToCard")]
+        //public async Task<IActionResult> SendMoneyToCard([FromBody] SendMoneyDto sendMoneyDto)
+        //{
+
+        //}
+
         #endregion
 
         #region PUT

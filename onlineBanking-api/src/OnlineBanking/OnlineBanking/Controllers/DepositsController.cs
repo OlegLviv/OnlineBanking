@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineBanking.BLL.Services.Abstract;
 using OnlineBanking.Core.Models;
 using OnlineBanking.Core.Models.Dtos.Deposit;
 using OnlineBanking.Filters.AuthorizationFilters;
+using System;
+using System.Threading.Tasks;
 
 namespace OnlineBanking.Controllers
 {

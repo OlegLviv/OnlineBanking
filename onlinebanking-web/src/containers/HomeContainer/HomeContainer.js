@@ -32,7 +32,6 @@ class HomeContainer extends BaseContainer {
                 }
             })
             .catch(err => {
-                console.log(err);
                 if (err && err.status === 400) {
                     this.setState({ errorMessage: err.data });
                 }
@@ -41,6 +40,7 @@ class HomeContainer extends BaseContainer {
 
     render() {
         const { userState, tokenState } = this.props;
+
         return (
             <Row type="flex" justify="space-between">
                 <Col span={12}>
@@ -49,7 +49,8 @@ class HomeContainer extends BaseContainer {
                     <LoginForm
                         loading={userState.loading || tokenState.loading}
                         onSubmitTwoFa={this.onSubmitTwoFa}
-                        onTokenSubmit={this.onTokenSubmit} />
+                        onTokenSubmit={this.onTokenSubmit}
+                        twoFactorInfo={userState.twoFactorInfo} />
                 </Col>
             </Row>
         );

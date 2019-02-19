@@ -20,8 +20,15 @@ class LoginForm extends React.Component {
         super(props);
 
         this.state = {
-            main: true
+            main: true,
+            expiredAfterText: ''
         }
+    }
+
+    componentDidUpdate(prevProps){
+        if(!this.props.loading && prevProps.loading && this.props.twoFactorInfo && this.props.twoFactorInfo.expiredAfter){
+            // this.startCodeExpireTiming()
+        }   
     }
 
     onSubmitTwoFa = e => {
@@ -87,6 +94,26 @@ class LoginForm extends React.Component {
         </Spin>
     );
 
+    // startCodeExpireTiming = () => {
+    //     const { expiredAfter } = this.props.twoFactorInfo;
+    //     const currentDate = new Date().getTime();
+    //     let secondsToExpire = expiredAfter * 60000;
+
+    //     const getInfo = () => {
+    //         const tick = new Date(currentDate + secondsToExpire) - new Date();
+    //         const minutes = Math.floor(tick / 60000);
+    //         const seconds = Math.round(tick / 1000 * 100) / 100;
+
+    //         if (secondsToExpire === 0)
+    //             this.setState({ expiredAfterText: 'Expired' });
+    //         else this.setState({ expiredAfterText: `Code expired after ${minutes}:${seconds}` });
+
+    //         secondsToExpire -= 1000;
+    //     }
+
+    //     setInterval(getInfo, 1000);
+    // }
+
     render2FaCodeForm = (getFieldDecorator, loading) => (
         <Spin spinning={loading}>
             <Form onSubmit={this.onTokenSubmit}>
@@ -94,6 +121,9 @@ class LoginForm extends React.Component {
                     <Alert message="Information!"
                         description="We have sent confirmation code to your email. Please check your email box and input code below"
                         type="info" />
+                </Form.Item>
+                <Form.Item>
+                    {this.state.expiredAfterText}
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator('code', {

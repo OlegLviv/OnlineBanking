@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using OnlineBanking.BLL.Providers;
 using OnlineBanking.BLL.Services.Abstract;
 using OnlineBanking.Core.Models;
@@ -13,6 +11,8 @@ using OnlineBanking.Core.Models.Dtos.Token;
 using OnlineBanking.Core.Models.Dtos.User;
 using OnlineBanking.Core.Models.Dtos.User.Register;
 using OnlineBanking.Filters.AuthorizationFilters;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineBanking.Controllers
 {
@@ -25,18 +25,21 @@ namespace OnlineBanking.Controllers
         private readonly IMapper _mapper;
         private readonly SignInManager<User> _signInManager;
         private readonly IEmailSendingService _emailSendingService;
+        private readonly IConfiguration _configuration;
 
         public UsersController(IUserService userService,
             UserManager<User> userManager,
             IMapper mapper,
             SignInManager<User> signInManager,
-            IEmailSendingService emailSendingService)
+            IEmailSendingService emailSendingService,
+            IConfiguration configuration)
         {
             _userService = userService;
             _userManager = userManager;
             _mapper = mapper;
             _signInManager = signInManager;
             _emailSendingService = emailSendingService;
+            _configuration = configuration;
         }
 
         [HttpGet("getCurrent")]
@@ -80,7 +83,8 @@ namespace OnlineBanking.Controllers
             return Ok(new TwoFactorDto
             {
                 UserId = user.Id,
-                Roles = (await _userManager.GetRolesAsync(user)).ToList()
+                Roles = (await _userManager.GetRolesAsync(user)).ToList(),
+                ExpiredAfter = int.Parse(_configuration["TwoFactorLifeTime"])
             });
         }
 

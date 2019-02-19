@@ -7,6 +7,7 @@ const HOST_NAME = 'localhost';
 const PORT = 44376;
 const PROD_PROTOCOL = 'https';
 const PROD_HOST_NAME = '';
+const HOME_URL = '/';
 
 const getApiUrl = () => {
     let apiUrl = `${PROTOCOL}://${HOST_NAME}:${PORT}`;
@@ -23,9 +24,9 @@ export const logIn = (token, redirectUrl) => {
     redirectUrl && window.location.replace(redirectUrl);
 }
 
-export const logOut = () => {
+export const logOut = (homeUrl = '/') => {
     localStorage.removeItem(ACCESS_TOKE);
-    window.location.replace('/login');
+    window.location.replace(homeUrl ? homeUrl : '/');
 }
 
 export const API_URL = getApiUrl();
@@ -42,7 +43,7 @@ export const headerToken = token => {
 
 const getPrivateApi = () => {
     if (localStorage.getItem(ACCESS_TOKE) === null) {
-        window.location.replace(`/login`);
+        window.location.replace(HOME_URL);
         return api;
     }
     else {
@@ -63,7 +64,7 @@ export const apiGet = async url => {
         .get(`${API_URL}${url}`)
         .then(resp => resp, ({ response }) => {
             if (response.status === 401) {
-                window.location.replace('/login');
+                window.location.replace(HOME_URL);
                 return response;
             }
             return Promise.reject(response);
@@ -75,7 +76,7 @@ export const apiPost = async (url, body) => {
         .post(`${API_URL}${url}`, body)
         .then(resp => resp, ({ response }) => {
             if (response.status === 401) {
-                window.location.replace('/login');
+                window.location.replace(HOME_URL);
                 return response;
             }
             return Promise.reject(response);
@@ -87,7 +88,7 @@ export const apiPut = async (url, body) => {
         .put(`${API_URL}${url}`, body)
         .then(resp => resp, ({ response }) => {
             if (response.status === 401) {
-                window.location.replace('/login');
+                window.location.replace(HOME_URL);
                 return response;
             }
             return Promise.reject(response);
@@ -99,7 +100,7 @@ export const apiDelete = async url => {
         .delete(`${API_URL}${url}`)
         .then(resp => resp, ({ response }) => {
             if (response.status === 401) {
-                window.location.replace('/login');
+                window.location.replace(HOME_URL);
                 return response;
             }
             return Promise.reject(response);

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using OnlineBanking.BLL.Storages;
 using OnlineBanking.Core.Models.DomainModels.User;
 using OnlineBanking.Core.Models.Providers;
@@ -11,12 +12,14 @@ namespace OnlineBanking.BLL.Providers
     public class UserTwoFactorTokenProvider : IUserTwoFactorTokenProvider<User>
     {
         private readonly IUserTwoFactorTokenStorage _storage;
+        private readonly IConfiguration _configuration;
         private const int MinCodeValue = 100_000;
         private const int MaxCodeValue = 999_999;
 
-        public UserTwoFactorTokenProvider(IUserTwoFactorTokenStorage storage)
+        public UserTwoFactorTokenProvider(IUserTwoFactorTokenStorage storage, IConfiguration configuration)
         {
             _storage = storage;
+            _configuration = configuration;
         }
 
         public async Task<string> GenerateAsync(string purpose, UserManager<User> manager, User user)
@@ -38,7 +41,7 @@ namespace OnlineBanking.BLL.Providers
 
             var code = new Random().Next(MinCodeValue, MaxCodeValue).ToString();
 
-            await _storage.AddAsync(new UserTwoFactorHolder(user.Id, code));
+            await _storage.AddAsync(new UserTwoFactorHolder(user.Id, code, DateTime.UtcNow.AddMinutes(int.Parse(_configuration["TwoFactorLifeTime"]))));
 
             return code;
         }
@@ -55,9 +58,7 @@ namespace OnlineBanking.BLL.Providers
             return await _storage.RemoveAsync(twoFactorHolder);
         }
 
-#pragma warning disable 1998
-        public async Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<User> manager, User user)
-#pragma warning restore 1998
-            => true;
+        public Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<User> manager, User user)
+            => Task.FromResult(true);
     }
 }
