@@ -17,7 +17,11 @@ import {
 
     CHANGE_CREDIT_LIMIT_REQUEST,
     CHANGE_CREDIT_LIMIT_SUCCESS,
-    CHANGE_CREDIT_LIMIT_FAILURE
+    CHANGE_CREDIT_LIMIT_FAILURE,
+
+    SEND_MONEY_TO_CARD_REQUEST,
+    SEND_MONEY_TO_CARD_SUCCESS,
+    SEND_MONEY_TO_CARD_FAILURE
 } from '../actions/crediCards';
 
 const defaultState = {
@@ -35,6 +39,7 @@ export default (state = defaultState, action) => {
         case FETCH_CREDIT_CARD_REQUEST:
         case CHANGE_PIN_REQUEST:
         case CHANGE_CREDIT_LIMIT_REQUEST:
+        case SEND_MONEY_TO_CARD_REQUEST:
             return {
                 ...state,
                 loading: true
@@ -50,6 +55,7 @@ export default (state = defaultState, action) => {
         case FETCH_CREDIT_CARD_SUCCESS:
         case CHANGE_PIN_SUCCESS:
         case CHANGE_CREDIT_LIMIT_SUCCESS:
+        case SEND_MONEY_TO_CARD_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -67,6 +73,7 @@ export default (state = defaultState, action) => {
         case FETCH_CREDIT_CARD_FAILURE:
         case CHANGE_PIN_FAILURE:
         case CHANGE_CREDIT_LIMIT_FAILURE:
+        case SEND_MONEY_TO_CARD_FAILURE:
             return {
                 ...state,
                 loading: false,

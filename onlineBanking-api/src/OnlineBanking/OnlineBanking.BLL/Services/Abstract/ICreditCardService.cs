@@ -17,6 +17,6 @@ namespace OnlineBanking.BLL.Services.Abstract
 
         Task<DataHolder<CreditCard>> ChangeCreditLimitAsync(ChangeCreditLimitDto limitDto, Guid userId);
 
-        Task<DataHolder<CreditCard>> SendMoney(SendMoneyDto sendMoneyDto, Guid userId);
+        Task<DataHolder<CreditCard>> SendMoneyAsync(SendMoneyDto sendMoneyDto, Guid userId);
     }
 }

@@ -5,7 +5,7 @@ import './CreditCardContainer.css';
 
 import { connect } from 'react-redux';
 import { fetchCreditCard } from '../../actions/crediCards';
-import { Card, Icon, Spin, Menu, Dropdown } from 'antd';
+import { Card, Icon, Spin, Menu, Dropdown, Tooltip } from 'antd';
 import { dateToExpireCard } from '../../utils/timeUtils';
 import { Link } from 'react-router-dom';
 import { normalizeCardNumber } from '../../utils/creditCardUtil';
@@ -46,11 +46,19 @@ class CreditCardContainer extends BaseContainer {
                         <Card className="credit-card" title="Credit Card"
                             actions={
                                 [
-                                    <Dropdown overlay={this.renderMenu}>
+                                    <Tooltip placement="top" title="Setting">
+                                        <Dropdown overlay={this.renderMenu}>
                                         <Icon type="setting" />
-                                    </Dropdown>,
-                                    <Icon type="edit" />,
-                                    <Icon type="ellipsis" />
+                                    </Dropdown>
+                                    </Tooltip>,
+                                    <Tooltip placement="top" title="Edit">
+                                        <Icon type="edit" />
+                                    </Tooltip>,
+                                    <Tooltip placement="top" title="Send money to card">    
+                                        <Link to={`/cab/${getRoleFromUrl(this.props)}/credit-card/${getIdFromUrl(this.props)}/send-to-card`}>
+                                            <Icon type="export" />
+                                        </Link>
+                                    </Tooltip>
                                 ]
                             }>
                             <Meta

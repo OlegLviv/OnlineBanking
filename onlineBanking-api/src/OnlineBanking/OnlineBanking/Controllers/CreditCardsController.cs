@@ -85,11 +85,21 @@ namespace OnlineBanking.Controllers
             return Ok(_mapper.Map<CreditCardOrder, CreditCardOrderDto>(createResult.Data));
         }
 
-        //[HttpPost("sendMoneyToCard")]
-        //public async Task<IActionResult> SendMoneyToCard([FromBody] SendMoneyDto sendMoneyDto)
-        //{
+        [HttpPost("sendMoneyToCard")]
+        public async Task<IActionResult> SendMoneyToCard([FromBody] SendMoneyDto sendMoneyDto)
+        {
+            var userIdHolder = await _userService.GetUserId(User.Identity.Name);
 
-        //}
+            if (userIdHolder.Status == DataHolderStatus.Unauthorized)
+                return Unauthorized();
+
+            var sendMoneyHolder = await _creditCardService.SendMoneyAsync(sendMoneyDto, new Guid(userIdHolder.Data));
+
+            if (sendMoneyHolder.Status == DataHolderStatus.Failure)
+                return BadRequest(sendMoneyHolder.Message);
+
+            return Ok(_mapper.Map<CreditCard, CreditCardDto>(sendMoneyHolder.Data));
+        }
 
         #endregion
 

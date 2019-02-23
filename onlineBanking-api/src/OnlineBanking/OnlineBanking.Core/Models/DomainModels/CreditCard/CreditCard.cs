@@ -25,7 +25,7 @@ namespace OnlineBanking.Core.Models.DomainModels.CreditCard
         public int Pin { get; set; }
 
         [Range(0, 100000)]
-        public int CreditLimit { get; set; }
+        public decimal CreditLimit { get; set; }
 
         [Range(0, 100000)]
         public decimal Balance { get; set; }
@@ -33,5 +33,7 @@ namespace OnlineBanking.Core.Models.DomainModels.CreditCard
         public decimal Credit { get; set; }
 
         public decimal Deposit { get; set; }
+
+        public decimal MoneyLimit { get; set; } = 100_000;
     }
 }

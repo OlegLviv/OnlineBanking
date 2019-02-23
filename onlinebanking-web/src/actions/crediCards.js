@@ -22,6 +22,10 @@ export const CHANGE_CREDIT_LIMIT_REQUEST = 'CHANGE_CREDIT_LIMIT_REQUEST';
 export const CHANGE_CREDIT_LIMIT_SUCCESS = 'CHANGE_CREDIT_LIMIT_SUCCESS';
 export const CHANGE_CREDIT_LIMIT_FAILURE = 'CHANGE_CREDIT_LIMIT_FAILURE';
 
+export const SEND_MONEY_TO_CARD_REQUEST = 'SEND_MONEY_TO_CARD_REQUEST';
+export const SEND_MONEY_TO_CARD_SUCCESS = 'SEND_MONEY_TO_CARD_SUCCESS';
+export const SEND_MONEY_TO_CARD_FAILURE = 'SEND_MONEY_TO_CARD_FAILURE';
+
 const fetchCreditCardsRequest = () => ({
     type: FETCH_CREDIT_CARDS_REQUEST
 });
@@ -145,5 +149,31 @@ export const changeCreditLimit = body => async dispatch => {
         .then(
             resp => dispatch(changeCreditLimitSuccess(resp.data)),
             err => handleError(dispatch, err, changeCreditLimitFailure)
+        );
+};
+
+const sendMoneyToCardRequest = () => ({
+    type: SEND_MONEY_TO_CARD_REQUEST
+});
+
+const sendMoneyToCardSuccess = creditCard => ({
+    type: SEND_MONEY_TO_CARD_SUCCESS,
+    creditCard
+});
+
+const sendMoneyToCardFailure = error => ({
+    type: SEND_MONEY_TO_CARD_FAILURE,
+    error
+});
+
+export const sendMoneyToCard = body => async dispath => {
+    dispath(sendMoneyToCardRequest());
+
+    return creditCardsService
+        .sendMoneyToCard(body)
+        .then(
+            resp => dispath(sendMoneyToCardSuccess(resp.data),
+                error => handleError(dispath, error, sendMoneyToCardFailure)
+            )
         );
 }

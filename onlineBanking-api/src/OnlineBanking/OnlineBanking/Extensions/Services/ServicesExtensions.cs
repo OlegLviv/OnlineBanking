@@ -14,6 +14,7 @@ namespace OnlineBanking.Extensions.Services
             serviceCollection.AddScoped<IUserService, UserService>();
             serviceCollection.AddScoped<ICreditCardService, CreditCardService>();
             serviceCollection.AddScoped<IDepositService, DepositService>();
+            serviceCollection.AddScoped<IConvertCurrencyService, ConvertCurrencyService>();
         }
     }
 }

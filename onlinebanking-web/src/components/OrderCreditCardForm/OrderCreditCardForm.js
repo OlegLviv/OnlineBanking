@@ -78,7 +78,7 @@ class OrderCreditCardForm extends React.Component {
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
                         Send order
-          </Button>
+                    </Button>
                 </Form.Item>
             </Form>
         );

@@ -15,5 +15,8 @@ export default {
     },
     changeCreditLimit(body) {
         return apiPut('/api/creditCards/changeCreditLimit', body);
+    },
+    sendMoneyToCard(body){
+        return apiPost('/api/creditCards/sendMoneyToCard', body);
     }
 }

@@ -6,10 +6,12 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using OnlineBanking.BLL.Services.Abstract;
 using OnlineBanking.Core.Models.DomainModels.CreditCard;
+using OnlineBanking.Core.Models.DomainModels.Logs;
 using OnlineBanking.Core.Models.DomainModels.User;
 using OnlineBanking.Core.Models.Dtos;
 using OnlineBanking.Core.Models.Dtos.CreditCard;
 using OnlineBanking.DAL;
+using OnlineBanking.Core.Extensions.DomainModelExtensions;
 
 namespace OnlineBanking.BLL.Services
 {
@@ -19,16 +21,22 @@ namespace OnlineBanking.BLL.Services
         private readonly IMapper _mapper;
         private readonly IRepository<CreditCard> _creditCardRepository;
         private readonly IRepository<User> _userRepository;
+        private readonly IConvertCurrencyService _convertCurrencyService;
+        private readonly IRepository<TransactionMoneyLog> _transactionMoneyLogRepository;
 
         public CreditCardService(IRepository<CreditCardOrder> creditCardOrderRepository,
             IMapper mapper,
             IRepository<CreditCard> creditCardRepository,
-            IRepository<User> userRepository)
+            IRepository<User> userRepository,
+            IConvertCurrencyService convertCurrencyService,
+            IRepository<TransactionMoneyLog> transactionMoneyLogRepository)
         {
             _creditCardOrderRepository = creditCardOrderRepository;
             _mapper = mapper;
             _creditCardRepository = creditCardRepository;
             _userRepository = userRepository;
+            _convertCurrencyService = convertCurrencyService;
+            _transactionMoneyLogRepository = transactionMoneyLogRepository;
         }
 
         public async Task<DataHolder<CreditCardOrder>> CreateOrderAsync(CreateCreditCardOrderDto dto, User user)
@@ -81,52 +89,61 @@ namespace OnlineBanking.BLL.Services
 
         public async Task<DataHolder<CreditCard>> ChangeCreditLimitAsync(ChangeCreditLimitDto limitDto, Guid userId)
         {
-            if(!limitDto.Id.HasValue)
+            if (!limitDto.Id.HasValue)
                 return DataHolder<CreditCard>.CreateFailure("Invalid credit card Id");
 
             var creditCard = await GetCreditCardById(limitDto.Id.Value, userId);
 
-            if(creditCard == null)
+            if (creditCard == null)
                 return DataHolder<CreditCard>.CreateFailure("Credit card doesn't exist");
 
             creditCard.CreditLimit = limitDto.NewLimit;
 
             var updateResult = await _creditCardRepository.UpdateAsync(creditCard);
 
-            if(updateResult < 0)
+            if (updateResult < 0)
                 return DataHolder<CreditCard>.CreateFailure("Can't update credit card");
 
             return DataHolder<CreditCard>.CreateSuccess(creditCard);
         }
 
-        public async Task<DataHolder<CreditCard>> SendMoney(SendMoneyDto sendMoneyDto, Guid userId)
+        public async Task<DataHolder<CreditCard>> SendMoneyAsync(SendMoneyDto sendMoneyDto, Guid userId)
         {
-            var existUser = await _userRepository
+            var fromCard = await _userRepository
                 .Table
-                .FirstOrDefaultAsync(user =>
-                    user.Id == userId && user.CreditCards.Any(card => card.CardNumber == sendMoneyDto.FromCardNumber));
+                .Where(user => user.Id == userId)
+                .SelectMany(user => user.CreditCards)
+                .FirstOrDefaultAsync(card => card.Id == sendMoneyDto.FromCardId);
 
-            if(existUser == null)
+            if (fromCard == null)
                 return DataHolder<CreditCard>.CreateFailure("Incorrect user id or credit card number");
 
-            var destCard = await _creditCardRepository.Table.FirstOrDefaultAsync(card => card.CardNumber == sendMoneyDto.ToCardNumber);
+            var destCard = await _creditCardRepository
+                .Table
+                .FirstOrDefaultAsync(card => card.CardNumber == sendMoneyDto.ToCardNumber);
 
-            if(destCard == null)
+            if (destCard == null)
                 return DataHolder<CreditCard>.CreateFailure("Invalid destination card number");
 
-            var fromCard = existUser.CreditCards.FirstOrDefault(card => card.CardNumber == sendMoneyDto.FromCardNumber);
+            var amount = await _convertCurrencyService.ConvertAsync(sendMoneyDto.Currency, (decimal)sendMoneyDto.Amount);
 
-            if(fromCard == null)
-                return DataHolder<CreditCard>.CreateFailure("Incorrect credit card number");
+            if (!fromCard.SubtractMoney(amount))
+                return DataHolder<CreditCard>.CreateFailure("Not enough money");
+            if (!destCard.AddMoney(amount))
+                return DataHolder<CreditCard>.CreateFailure("Exceeded the money limit");
 
-            // Todo need convert if another currency
-            fromCard.Balance -= (decimal) sendMoneyDto.Amount;
-            destCard.Balance += (decimal) sendMoneyDto.Amount;
+            var updateResult = await _creditCardRepository.UpdateAsync(new List<CreditCard> { fromCard, destCard });
 
-            var updateResult = await _creditCardRepository.UpdateAsync(new List<CreditCard> {fromCard, destCard});
-
-            if(updateResult <= 0)
+            if (updateResult <= 0)
                 return DataHolder<CreditCard>.CreateFailure("Can't update balance");
+
+            await _transactionMoneyLogRepository.InsertAsync(new TransactionMoneyLog
+            {
+                Amount = amount,
+                Currency = sendMoneyDto.Currency,
+                UserFromId = userId,
+                UserToId = destCard.UserId,
+            });
 
             return DataHolder<CreditCard>.CreateSuccess(fromCard);
         }
