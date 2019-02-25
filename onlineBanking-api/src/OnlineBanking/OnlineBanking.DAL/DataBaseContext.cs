@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineBanking.Core.Models.DomainModels;
+using OnlineBanking.Core.Models.DomainModels.Logs;
 using OnlineBanking.Core.Models.DomainModels.User;
 
 namespace OnlineBanking.DAL
@@ -13,6 +14,8 @@ namespace OnlineBanking.DAL
         {
             Database.EnsureCreated();
         }
+
+        public DbSet<TransactionMoneyLog> TransactionMoneyLogs { get; set; }
 
         public DataBaseContext() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

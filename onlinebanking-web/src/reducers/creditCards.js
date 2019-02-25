@@ -3,13 +3,17 @@ import {
     FETCH_CREDIT_CARDS_SUCCESS,
     FETCH_CREDIT_CARDS_FAILURE,
 
-    CREATE_ORDER_REQUEST,
-    CREATE_ORDER_SUCCESS,
-    CREATE_ORDER_FAILURE,
-
     FETCH_CREDIT_CARD_REQUEST,
     FETCH_CREDIT_CARD_SUCCESS,
     FETCH_CREDIT_CARD_FAILURE,
+
+    FETCH_COSTS_LOG_REQUEST,
+    FETCH_COSTS_LOG_SUCCESS,
+    FETCH_COSTS_LOG_FAILURE,
+
+    CREATE_ORDER_REQUEST,
+    CREATE_ORDER_SUCCESS,
+    CREATE_ORDER_FAILURE,
 
     CHANGE_PIN_REQUEST,
     CHANGE_PIN_SUCCESS,
@@ -29,7 +33,8 @@ const defaultState = {
     creditCard: null,
     loading: false,
     error: null,
-    creditCardOrder: null
+    creditCardOrder: null,
+    costsLog: null
 };
 
 export default (state = defaultState, action) => {
@@ -40,6 +45,7 @@ export default (state = defaultState, action) => {
         case CHANGE_PIN_REQUEST:
         case CHANGE_CREDIT_LIMIT_REQUEST:
         case SEND_MONEY_TO_CARD_REQUEST:
+        case FETCH_COSTS_LOG_REQUEST:
             return {
                 ...state,
                 loading: true
@@ -67,6 +73,12 @@ export default (state = defaultState, action) => {
                 loading: false,
                 creditCardOrder: action.creditCardOrder
             };
+        case FETCH_COSTS_LOG_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                costsLog: action.costsLog
+            };
 
         case FETCH_CREDIT_CARDS_FAILURE:
         case CREATE_ORDER_FAILURE:
@@ -74,6 +86,7 @@ export default (state = defaultState, action) => {
         case CHANGE_PIN_FAILURE:
         case CHANGE_CREDIT_LIMIT_FAILURE:
         case SEND_MONEY_TO_CARD_FAILURE:
+        case FETCH_COSTS_LOG_FAILURE:
             return {
                 ...state,
                 loading: false,

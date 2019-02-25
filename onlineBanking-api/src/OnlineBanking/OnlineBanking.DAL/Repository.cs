@@ -25,7 +25,7 @@ namespace OnlineBanking.DAL
         public virtual async Task<TEntity> GetByIdAsync(object id)
             => await Entities.FindAsync(id);
 
-        public virtual async Task<int> InsertAsync(IEnumerable<TEntity> entities)
+        public virtual async Task<int> InsertAsync(ICollection<TEntity> entities)
         {
             try
             {

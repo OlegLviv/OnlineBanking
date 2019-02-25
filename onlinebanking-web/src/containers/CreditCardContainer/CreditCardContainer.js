@@ -48,13 +48,15 @@ class CreditCardContainer extends BaseContainer {
                                 [
                                     <Tooltip placement="top" title="Setting">
                                         <Dropdown overlay={this.renderMenu}>
-                                        <Icon type="setting" />
-                                    </Dropdown>
+                                            <Icon type="setting" />
+                                        </Dropdown>
                                     </Tooltip>,
-                                    <Tooltip placement="top" title="Edit">
-                                        <Icon type="edit" />
+                                    <Tooltip placement="top" title="Costs">
+                                        <Link to={`/cab/${getRoleFromUrl(this.props)}/credit-card/${getIdFromUrl(this.props)}/costs`}>
+                                            <Icon type="swap" />
+                                        </Link>
                                     </Tooltip>,
-                                    <Tooltip placement="top" title="Send money to card">    
+                                    <Tooltip placement="top" title="Send money to card">
                                         <Link to={`/cab/${getRoleFromUrl(this.props)}/credit-card/${getIdFromUrl(this.props)}/send-to-card`}>
                                             <Icon type="export" />
                                         </Link>

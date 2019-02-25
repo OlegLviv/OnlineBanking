@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using OnlineBanking.BLL.Services.Abstract;
+using OnlineBanking.Core;
 using OnlineBanking.Core.Models.DomainModels.CreditCard;
 using OnlineBanking.Core.Models.DomainModels.Logs;
 using OnlineBanking.Core.Models.DomainModels.User;
@@ -12,6 +13,10 @@ using OnlineBanking.Core.Models.Dtos;
 using OnlineBanking.Core.Models.Dtos.CreditCard;
 using OnlineBanking.DAL;
 using OnlineBanking.Core.Extensions.DomainModelExtensions;
+using OnlineBanking.Core.Extensions.Linq;
+using OnlineBanking.Core.Models.Dtos.Logs;
+using OnlineBanking.Core.Models.Dtos.User;
+using OnlineBanking.Core.Models.Dtos.User.Register;
 
 namespace OnlineBanking.BLL.Services
 {
@@ -137,15 +142,63 @@ namespace OnlineBanking.BLL.Services
             if (updateResult <= 0)
                 return DataHolder<CreditCard>.CreateFailure("Can't update balance");
 
-            await _transactionMoneyLogRepository.InsertAsync(new TransactionMoneyLog
+            await _transactionMoneyLogRepository.InsertAsync(new []
             {
-                Amount = amount,
-                Currency = sendMoneyDto.Currency,
-                UserFromId = userId,
-                UserToId = destCard.UserId,
+                new TransactionMoneyLog
+                {
+                    Amount = amount,
+                    Currency = sendMoneyDto.Currency,
+                    UserFromId = userId,
+                    UserToId = destCard.UserId,
+                    IsInput = false
+                },
+                new TransactionMoneyLog
+                {
+                    Amount = amount,
+                    Currency = sendMoneyDto.Currency,
+                    UserFromId = destCard.UserId,
+                    UserToId = userId,
+                    IsInput = true
+                }
             });
 
             return DataHolder<CreditCard>.CreateSuccess(fromCard);
+        }
+
+        public async Task<DataHolder<Pager<TransactionMoneyLogDto>>> GetTransactionMoneyLogAsync(Guid cardId, int itemPerPage, int page)
+        {
+            var curUserInfo = await _userRepository
+                .Table
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.CreditCards.Any(cc => cc.Id == cardId));
+
+            if (curUserInfo == null)
+                return DataHolder<Pager<TransactionMoneyLogDto>>.CreateFailure("Invalid card id");
+
+            var logs = _transactionMoneyLogRepository
+                .Table
+                .Where(log => log.UserFromId == curUserInfo.Id);
+            var pager = new Pager<TransactionMoneyLogDto>
+            {
+                Total = await logs.CountAsync(),
+                Page = page,
+                Data = await logs
+                    .Join(_userRepository.Table,
+                        log => log.UserToId,
+                        u => u.Id,
+                        (log, user) => new TransactionMoneyLogDto
+                        {
+                            Date = log.Date,
+                            Currency = log.Currency,
+                            Amount = log.Amount,
+                            DestinationUser = new UserLogDto { Name = user.Name, LastName = user.LastName }
+                        })
+                    .Page(itemPerPage, page)
+                    .ToListAsync()
+            };
+
+
+            return DataHolder<Pager<TransactionMoneyLogDto>>.CreateSuccess(pager);
         }
 
         private Task<CreditCard> GetCreditCardById(Guid id, Guid userId)

@@ -65,6 +65,20 @@ namespace OnlineBanking.Controllers
             return Ok(_mapper.Map<CreditCard, CreditCardDto>(creditCardHolder.Data));
         }
 
+        [HttpGet("costs/{id}/{itemPerPage:int}/{page:int}")]
+        public async Task<IActionResult> GetCosts(Guid id, int itemPerPage = 10, int page = 1)
+        {
+            if (id == Guid.Empty)
+                return BadRequest("Invalid id");
+
+            var logsHolder = await _creditCardService.GetTransactionMoneyLogAsync(id, itemPerPage, page);
+
+            if (logsHolder.Status == DataHolderStatus.Failure)
+                return BadRequest(logsHolder.Message);
+
+            return Ok(logsHolder.Data);
+        }
+
         #endregion
 
         #region POST

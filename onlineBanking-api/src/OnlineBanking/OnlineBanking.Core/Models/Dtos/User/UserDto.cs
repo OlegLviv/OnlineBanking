@@ -13,6 +13,7 @@ namespace OnlineBanking.Core.Models.Dtos.User
         public string PhoneNumber { get; set; }
 
         public DateTime Birthday { get; set; }
+
         public string Email { get; set; }
     }
 }

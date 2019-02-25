@@ -7,16 +7,14 @@ namespace OnlineBanking.Core.Models.DomainModels.Logs
     {
         public DateTime Date { get; set; } = DateTime.UtcNow;
 
-        public User.User UserFrom { get; set; }
-
         public Guid UserFromId { get; set; }
-
-        public User.User UserTo { get; set; }
 
         public Guid UserToId { get; set; }
 
         public decimal Amount { get; set; }
 
         public string Currency { get; set; }
+
+        public bool IsInput { get; set; }
     }
 }

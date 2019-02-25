@@ -11,6 +11,7 @@ namespace OnlineBanking.DAL
 
         Task<TEntity> GetByIdAsync(object id);
         Task<int> InsertAsync(TEntity entity);
+        Task<int> InsertAsync(ICollection<TEntity> entities);
         Task<int> UpdateAsync(TEntity entity);
         Task<int> UpdateAsync(ICollection<TEntity> entities);
         Task<int> DeleteAsync(TEntity entity);

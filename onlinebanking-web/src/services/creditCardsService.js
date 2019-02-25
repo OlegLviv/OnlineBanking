@@ -7,6 +7,9 @@ export default {
     getCreditCard(id) {
         return apiGet(`/api/creditCards/${id}`);
     },
+    getCosts(id, itemPerPage, page) {
+        return apiGet(`/api/creditCards/costs/${id}/${itemPerPage}/${page}`);
+    },
     createOrder(body) {
         return apiPost('/api/creditCards/createOrder', body);
     },
@@ -16,7 +19,7 @@ export default {
     changeCreditLimit(body) {
         return apiPut('/api/creditCards/changeCreditLimit', body);
     },
-    sendMoneyToCard(body){
+    sendMoneyToCard(body) {
         return apiPost('/api/creditCards/sendMoneyToCard', body);
     }
 }

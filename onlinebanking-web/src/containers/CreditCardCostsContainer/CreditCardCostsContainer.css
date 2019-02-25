@@ -1,0 +1,11 @@
+.costs-item {
+    display: flex;
+    align-items: center;
+}
+
+.costs-item-sub {
+    padding: 0 .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

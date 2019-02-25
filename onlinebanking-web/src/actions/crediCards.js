@@ -6,13 +6,17 @@ export const FETCH_CREDIT_CARDS_REQUEST = 'FETCH_CREDIT_CARDS_REQUEST';
 export const FETCH_CREDIT_CARDS_SUCCESS = 'FETCH_CREDIT_CARDS_SUCCESS';
 export const FETCH_CREDIT_CARDS_FAILURE = 'FETCH_CREDIT_CARDS_FAILURE';
 
-export const CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST';
-export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
-export const CREATE_ORDER_FAILURE = 'CREATE_ORDER_FAILURE';
-
 export const FETCH_CREDIT_CARD_REQUEST = 'FETCH_CREDIT_CARD_REQUEST';
 export const FETCH_CREDIT_CARD_SUCCESS = 'FETCH_CREDIT_CARD_SUCCESS';
 export const FETCH_CREDIT_CARD_FAILURE = 'FETCH_CREDIT_CARD_FAILURE';
+
+export const FETCH_COSTS_LOG_REQUEST = 'FETCH_COSTS_LOG_REQUEST';
+export const FETCH_COSTS_LOG_SUCCESS = 'FETCH_COSTS_LOG_SUCCESS';
+export const FETCH_COSTS_LOG_FAILURE = 'FETCH_COSTS_LOG_FAILURE';
+
+export const CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST';
+export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
+export const CREATE_ORDER_FAILURE = 'CREATE_ORDER_FAILURE';
 
 export const CHANGE_PIN_REQUEST = 'CHANGE_PIN_REQUEST';
 export const CHANGE_PIN_SUCCESS = 'CHANGE_PIN_SUCCESS';
@@ -174,6 +178,32 @@ export const sendMoneyToCard = body => async dispath => {
         .then(
             resp => dispath(sendMoneyToCardSuccess(resp.data),
                 error => handleError(dispath, error, sendMoneyToCardFailure)
+            )
+        );
+};
+
+const fetchCostsLogRequest = () => ({
+    type: FETCH_COSTS_LOG_REQUEST
+});
+
+const fetchCostsLogSuccess = costsLog => ({
+    type: FETCH_COSTS_LOG_SUCCESS,
+    costsLog
+});
+
+const fetchCostsLogFailure = error => ({
+    type: FETCH_COSTS_LOG_FAILURE,
+    error
+});
+
+export const fetchCostsLog = (id, itemPerPage, page) => async dispatch => {
+    dispatch(fetchCostsLogRequest());
+
+    return creditCardsService
+        .getCosts(id, itemPerPage, page)
+        .then(
+            resp => dispatch(fetchCostsLogSuccess(resp.data),
+                error => handleError(dispatch, error, fetchCostsLogFailure)
             )
         );
 }

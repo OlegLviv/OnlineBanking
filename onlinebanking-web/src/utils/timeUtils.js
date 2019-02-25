@@ -5,3 +5,5 @@ export const dateToExpireCard = date => {
 }
 
 export const toMinuteAndSeconds = date => `${date.getMinutes()}:${date.getSeconds()}`;
+
+export const toDateAndTime = date => `${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString()}`;
