@@ -18,6 +18,10 @@ const getRoleFromUrl = ({ match }) => match.params.role;
 
 class CreditCardContainer extends BaseContainer {
 
+    state = {
+        cvvHidden: true
+    }
+
     componentWillMount() {
         this.props.fetchCreditCard(getIdFromUrl(this.props));
     }
@@ -35,6 +39,8 @@ class CreditCardContainer extends BaseContainer {
             </Menu.Item>
         </Menu>
     );
+
+    onShowCvvClick = () => this.setState({ cvvHidden: false });
 
     render() {
         const { creditCard, loading } = this.props.creditCardState;
@@ -83,6 +89,10 @@ class CreditCardContainer extends BaseContainer {
                             <div className="inline pad">
                                 <Meta title="Credit limit:" />
                                 <Meta className="pad-l" description={creditCard && creditCard.creditLimit + ' ₴'} />
+                            </div>
+                            <div className="inline pad">
+                                <a onClick={this.onShowCvvClick}>Show CVV:</a>
+                                <Meta className="pad-l" description={this.state.cvvHidden ? '***' : creditCard.cvv} />
                             </div>
                         </Card>
                 }

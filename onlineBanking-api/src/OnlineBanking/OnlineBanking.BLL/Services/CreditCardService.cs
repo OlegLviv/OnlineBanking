@@ -191,7 +191,8 @@ namespace OnlineBanking.BLL.Services
                             Date = log.Date,
                             Currency = log.Currency,
                             Amount = log.Amount,
-                            DestinationUser = new UserLogDto { Name = user.Name, LastName = user.LastName }
+                            DestinationUser = new UserLogDto { Name = user.Name, LastName = user.LastName },
+                            IsInput = log.IsInput
                         })
                     .Page(itemPerPage, page)
                     .ToListAsync()

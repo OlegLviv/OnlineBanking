@@ -4,7 +4,7 @@ import './CreditCardCostsContainer.css';
 
 import { connect } from 'react-redux'
 import { fetchCostsLog } from '../../actions/crediCards';
-import { Pagination, List } from 'antd';
+import { Pagination, List, Icon } from 'antd';
 import { toDateAndTime } from '../../utils/timeUtils';
 
 const itemPerPage = 10;
@@ -38,8 +38,9 @@ export class CreditCardCostsContainer extends BaseContainer {
           renderItem={item => (
             <List.Item>
               <div className="costs-item">
+                <Icon type={`arrow-${item.isInput ? 'right' : 'left'}`} />
                 <div className="costs-item-sub">
-                  <div>{`Amount: ${item.amount}`}</div>
+                  <div>{`Amount: ${item.isInput ? '+' + item.amount : '-' + item.amount}`}</div>
                   <small>{`Date: ${toDateAndTime(item.date)}`}</small>
                 </div>
                 <div className="costs-item-sub">

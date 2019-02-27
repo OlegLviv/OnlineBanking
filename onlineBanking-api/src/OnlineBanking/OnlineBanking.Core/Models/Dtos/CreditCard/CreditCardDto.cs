@@ -18,5 +18,7 @@ namespace OnlineBanking.Core.Models.Dtos.CreditCard
         public decimal Balance { get; set; }
 
         public decimal Credit { get; set; }
+
+        public int Cvv { get; set; }
     }
 }

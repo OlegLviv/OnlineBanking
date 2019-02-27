@@ -35,3 +35,11 @@
 .pad-top{
     padding-top: 1rem;
 }
+
+.cvv-but{
+    cursor: pointer;
+}
+
+.cvv-but:hover .cvv-but:first-child:first-child{
+    color: #40a9ff;
+}

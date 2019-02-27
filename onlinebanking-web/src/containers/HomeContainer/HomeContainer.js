@@ -28,7 +28,7 @@ class HomeContainer extends BaseContainer {
             .fetchToken(userId, code)
             .then(resp => {
                 if (resp.token && resp.token.accessToken) {
-                    logIn(resp.token.accessToken, `/cab/${userRoles[0]}`);
+                    logIn(resp.token.accessToken, `/cab/${userRoles[0]}/credit-cards/list`);
                 }
             })
             .catch(err => {

@@ -12,5 +12,7 @@ namespace OnlineBanking.Core.Models.Dtos.Logs
         public string Currency { get; set; }
 
         public UserLogDto DestinationUser { get; set; }
+
+        public bool IsInput { get; set; }
     }
 }
