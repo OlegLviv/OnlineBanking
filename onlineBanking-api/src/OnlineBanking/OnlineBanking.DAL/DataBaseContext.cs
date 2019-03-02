@@ -17,7 +17,6 @@ namespace OnlineBanking.DAL
 
         public DbSet<TransactionMoneyLog> TransactionMoneyLogs { get; set; }
 
-        public DataBaseContext() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseLazyLoadingProxies();
     }

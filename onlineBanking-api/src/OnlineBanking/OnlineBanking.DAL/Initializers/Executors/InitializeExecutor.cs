@@ -20,7 +20,7 @@ namespace OnlineBanking.DAL.Initializers.Executors
             => Assembly
                 .GetAssembly(typeof(InitializeExecutor))
                 .GetTypes()
-                .Where(type => typeof(IInitializer).IsAssignableFrom(type) && !type.IsAbstract)   
+                .Where(type => typeof(IInitializer).IsAssignableFrom(type) && !type.IsAbstract)
                 .Select(type => (IInitializer)Activator.CreateInstance(type))
                 .OrderBy(initializer => initializer.Priority)
                 .ToList();
