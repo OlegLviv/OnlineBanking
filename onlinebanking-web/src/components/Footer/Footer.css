@@ -1,0 +1,22 @@
+.footer-body{
+    background: #001529;
+}   
+
+.footer-body a{
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.footer-body a:hover{
+    color: white;
+}
+
+.footer-main-links{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-copyright{
+    color: rgba(255, 255, 255, 0.65);
+    padding-top: 1rem;
+    text-align: center;
+}

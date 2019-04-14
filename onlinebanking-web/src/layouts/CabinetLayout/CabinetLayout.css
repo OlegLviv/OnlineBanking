@@ -9,3 +9,8 @@
     padding: 3rem 5rem;
     min-height: 100vh !important;
 }
+
+.ant-layout-footer{
+    background: #001529 !important;
+    padding: 1rem 1rem .5rem 1rem !important;
+}

@@ -38,7 +38,8 @@ export class CreditCardCostsContainer extends BaseContainer {
           renderItem={item => (
             <List.Item>
               <div className="costs-item">
-                <Icon type={`arrow-${item.isInput ? 'right' : 'left'}`} />
+                <Icon type={`arrow-${item.isInput ? 'right' : 'left'}`}
+                  className={item.isInput ? 'color-green' : 'color-red'} />
                 <div className="costs-item-sub">
                   <div>{`Amount: ${item.isInput ? '+' + item.amount : '-' + item.amount}`}</div>
                   <small>{`Date: ${toDateAndTime(item.date)}`}</small>
