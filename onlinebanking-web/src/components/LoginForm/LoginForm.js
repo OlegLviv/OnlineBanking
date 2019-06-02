@@ -9,7 +9,8 @@ import {
     Button,
     Alert,
     Select,
-    Spin
+    Spin,
+    Card
 } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -25,10 +26,10 @@ class LoginForm extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps){
-        if(!this.props.loading && prevProps.loading && this.props.twoFactorInfo && this.props.twoFactorInfo.expiredAfter){
+    componentDidUpdate(prevProps) {
+        if (!this.props.loading && prevProps.loading && this.props.twoFactorInfo && this.props.twoFactorInfo.expiredAfter) {
             // this.startCodeExpireTiming()
-        }   
+        }
     }
 
     onSubmitTwoFa = e => {
@@ -65,6 +66,7 @@ class LoginForm extends React.Component {
 
     renderMainForm = (getFieldDecorator, prefixSelector, loading) => (
         <Spin spinning={loading}>
+            <h3>Authorization</h3>
             <Form className={classnames('login-form', this.props.className)}
                 onSubmit={this.onSubmitTwoFa}>
                 <Form.Item>
@@ -164,9 +166,17 @@ class LoginForm extends React.Component {
         );
 
         if (this.state.main)
-            return this.renderMainForm(getFieldDecorator, prefixSelector, loading);
+            return <Card>
+                {
+                    this.renderMainForm(getFieldDecorator, prefixSelector, loading)
+                }
+            </Card>;
 
-        return this.render2FaCodeForm(getFieldDecorator, loading);
+        return <Card>
+            {
+                this.render2FaCodeForm(getFieldDecorator, loading)
+            }
+        </Card>;
     }
 }
 

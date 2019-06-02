@@ -47,6 +47,14 @@ class HomeContainer extends BaseContainer {
                 type="flex"
                 justify="space-between">
                 <Col span={12}>
+                    <div className="main-home-box">
+                        <div className="main-home-box-head-text home-text">Cool swift bank</div>
+                        <div className="main-home-box-sub-head-text home-text">We will calculate the credit limit individually for you without interviews with credit brokers and visits to the bank. You will only need passport photo and TIN</div>
+                        <div className="main-home-box-btns">
+                            <button>Get it now</button>
+                            <button>Features</button>
+                        </div>
+                    </div>
                 </Col>
                 <Col span={8}>
                     <LoginForm

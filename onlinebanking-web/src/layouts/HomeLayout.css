@@ -1,0 +1,56 @@
+.home-layout{
+    background: rgba(15,135,255,1);
+    background: -moz-linear-gradient(-45deg, rgba(15,135,255,1) 6%, rgba(40,161,247,1) 30%, rgba(114,238,222,1) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(15,135,255,1) 6%, rgba(40,161,247,1) 30%, rgba(114,238,222,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(15,135,255,1) 6%, rgba(40,161,247,1) 30%, rgba(114,238,222,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(15,135,255,1) 6%, rgba(40,161,247,1) 30%, rgba(114,238,222,1) 100%);
+    background: linear-gradient(135deg, rgba(15,135,255,1) 6%, rgba(40,161,247,1) 30%, rgba(114,238,222,1) 100%);
+}
+
+.home-text{
+    color: #fff;
+}
+
+.main-home-box-head-text{
+    font-size: 54px;
+    font-weight: bold;
+}
+
+.main-home-box-sub-head-text{
+    font-size: 22px;
+}
+
+.main-home-box-btns button{
+    border-radius: 2rem;
+    border: 2px #fff solid;
+    padding: .6rem 2.5rem;
+    margin: 1rem .5rem;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 5px 7px 1px rgba(0,0,0,0.25);
+}
+
+.main-home-box-btns button:focus{
+    outline: none;
+}
+
+.main-home-box-btns :first-child{
+    background: #fff;
+    color: rgba(15,135,255,1);;
+}
+
+.main-home-box-btns :first-child:hover{
+    background: transparent;
+    color: #fff;
+}
+
+.main-home-box-btns :last-child{
+    background: transparent;
+    color: #fff;
+}
+
+.main-home-box-btns :last-child:hover{
+    background: #fff;
+    color: rgba(15,135,255,1);;
+}

@@ -1,0 +1,19 @@
+.header-box{
+    display: flex;
+    height: 4rem;
+}
+
+.logo-box{
+    flex: 2;
+}
+
+.logo-box img{
+    height: 100%;
+    padding: 0.6rem 2rem;
+    background: rgba(255, 255, 255, .7);
+    margin: 1rem 1rem;
+}
+
+.header-box-menu{
+    flex: 8;
+}
