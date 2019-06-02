@@ -1,3 +1,7 @@
 .ant-row-flex {
     padding: 5rem 10rem;
 }
+
+.home-row{
+    min-height: 100vh;
+}

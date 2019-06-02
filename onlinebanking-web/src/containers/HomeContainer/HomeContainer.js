@@ -11,7 +11,7 @@ import { logIn } from '../../api/api';
 import { Row, Col } from 'antd';
 
 class HomeContainer extends BaseContainer {
-    
+
     onSubmitTwoFa = e => this.props.send2FaCode({
         phoneNumber: `${e.prefix}${e.phoneNumber}`,
         password: e.password
@@ -19,7 +19,7 @@ class HomeContainer extends BaseContainer {
         .catch(err => {
             if (err && err.status === 400) {
                 this.setState({ errorMessage: err.data });
-                console.log('asdasd',err)
+                console.log('asdasd', err)
             }
         });
 
@@ -42,7 +42,10 @@ class HomeContainer extends BaseContainer {
         const { userState, tokenState } = this.props;
 
         return (
-            <Row type="flex" justify="space-between">
+            <Row
+                className="home-row"
+                type="flex"
+                justify="space-between">
                 <Col span={12}>
                 </Col>
                 <Col span={8}>
