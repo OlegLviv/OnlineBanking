@@ -38,7 +38,7 @@ namespace OnlineBanking.BLL.Services
 
                 return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }

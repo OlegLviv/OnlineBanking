@@ -73,7 +73,7 @@ namespace OnlineBanking.Controllers
             if (!(await _signInManager.CheckPasswordSignInAsync(user, logInDto.Password, true)).Succeeded)
                 return BadRequest("Incorrect password");
 
-            var twoFactorToken = await _userManager.GenerateTwoFactorTokenAsync(user, ProviderConstansts.UserTwoFactorTokenProvider);
+            var twoFactorToken = await _userManager.GenerateTwoFactorTokenAsync(user, ProviderConstants.UserTwoFactorTokenProvider);
 
             if (twoFactorToken == null)
                 return BadRequest("Can't generate new token");

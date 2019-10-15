@@ -24,7 +24,7 @@ namespace OnlineBanking.Extensions.Services
                 .AddSignInManager<SignInManager<User>>()
                 .AddRoleManager<RoleManager<Core.Models.DomainModels.IdentityRole>>()
                 .AddDefaultTokenProviders()
-                .AddTokenProvider<UserTwoFactorTokenProvider>(ProviderConstansts.UserTwoFactorTokenProvider);
+                .AddTokenProvider<UserTwoFactorTokenProvider>(ProviderConstants.UserTwoFactorTokenProvider);
         }
     }
 }

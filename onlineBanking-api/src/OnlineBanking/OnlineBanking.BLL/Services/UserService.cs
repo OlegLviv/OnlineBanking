@@ -36,10 +36,7 @@ namespace OnlineBanking.BLL.Services
                                              user.Email == identityName ||
                                              user.PhoneNumber == identityName);
 
-            if(userData == null)
-                return DataHolder<User>.CreateUnauthorized();
-
-            return DataHolder<User>.CreateSuccess(userData);
+            return userData == null ? DataHolder<User>.CreateUnauthorized() : DataHolder<User>.CreateSuccess(userData);
         }
 
         public async Task<DataHolder<string>> GetUserId(string identityName)
@@ -53,10 +50,7 @@ namespace OnlineBanking.BLL.Services
                 .Select(user => user.Id)
                 .FirstOrDefaultAsync();
 
-            if(userId == Guid.Empty)
-                return DataHolder<string>.CreateUnauthorized();
-
-            return DataHolder<string>.CreateSuccess(userId.ToString());
+            return userId == Guid.Empty ? DataHolder<string>.CreateUnauthorized() : DataHolder<string>.CreateSuccess(userId.ToString());
         }
 
         public async Task<DataHolder<User>> RegisterUserAsync(RegisterUserDto registerUserDto)
@@ -73,7 +67,7 @@ namespace OnlineBanking.BLL.Services
             var user = _mapper.Map<RegisterUserDto, User>(registerUserDto);
             var passportDto = registerUserDto.Passport;
 
-            SetTaxpayedToUser(user, registerUserDto.TaxpayerСard.Code, await WriteStreamToBufferAsync(registerUserDto.TaxpayerСard.Photo.OpenReadStream()));
+            SetTaxPayedToUser(user, registerUserDto.TaxpayerСard.Code, await WriteStreamToBufferAsync(registerUserDto.TaxpayerСard.Photo.OpenReadStream()));
             SetPassportToUser(user,
                 await WriteStreamToBufferAsync(passportDto.FirsPage.OpenReadStream()),
                 await WriteStreamToBufferAsync(passportDto.SecondPage.OpenReadStream()),
@@ -99,7 +93,7 @@ namespace OnlineBanking.BLL.Services
             }
         }
 
-        private static void SetTaxpayedToUser(User user, string code, byte[] photo)
+        private static void SetTaxPayedToUser(User user, string code, byte[] photo)
             => user.TaxpayerСard = new TaxpayerСard
             {
                 User = user,

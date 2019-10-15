@@ -46,7 +46,7 @@ namespace OnlineBanking.Controllers
             if (user == null)
                 return BadRequest("Incorrect user id");
 
-            if (!await _userManager.VerifyTwoFactorTokenAsync(user, ProviderConstansts.UserTwoFactorTokenProvider, code)
+            if (!await _userManager.VerifyTwoFactorTokenAsync(user, ProviderConstants.UserTwoFactorTokenProvider, code)
             )
                 return BadRequest("Incorrect security code");
 

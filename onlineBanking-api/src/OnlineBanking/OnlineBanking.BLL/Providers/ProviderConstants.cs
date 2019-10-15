@@ -1,6 +1,6 @@
 ﻿namespace OnlineBanking.BLL.Providers
 {
-    public struct ProviderConstansts
+    public struct ProviderConstants
     {
         public const string UserTwoFactorTokenProvider = nameof(UserTwoFactorTokenProvider);
     }
